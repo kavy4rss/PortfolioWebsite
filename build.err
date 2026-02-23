@@ -1,0 +1,29 @@
+[36mvite v7.3.1 [32mbuilding client environment for production...[36m[39m
+transforming...
+[32m✓[39m 2203 modules transformed.
+rendering chunks...
+computing gzip size...
+[2mdist/[22m[32mindex.html                             [39m[1m[2m    0.77 kB[22m[1m[22m[2m │ gzip:   0.43 kB[22m
+[2mdist/[22m[32massets/Bulb-BhvsuElY.svg               [39m[1m[2m    6.85 kB[22m[1m[22m[2m │ gzip:   2.42 kB[22m
+[2mdist/[22m[32massets/5-poxdNaLE.jpeg                 [39m[1m[2m   64.73 kB[22m[1m[22m
+[2mdist/[22m[32massets/6-7VjKjRx5.jpeg                 [39m[1m[2m   72.84 kB[22m[1m[22m
+[2mdist/[22m[32massets/3-Bftt6Eth.jpeg                 [39m[1m[2m   83.97 kB[22m[1m[22m
+[2mdist/[22m[32massets/Freelancer_CRM-CUbRcEJu.jpeg    [39m[1m[2m   84.11 kB[22m[1m[22m
+[2mdist/[22m[32massets/4-DFpsNTyM.jpeg                 [39m[1m[2m   88.06 kB[22m[1m[22m
+[2mdist/[22m[32massets/2-AJVT46ut.jpeg                 [39m[1m[2m  103.33 kB[22m[1m[22m
+[2mdist/[22m[32massets/AboutPage-CVtQ2Fl6.webp         [39m[1m[2m  253.77 kB[22m[1m[22m
+[2mdist/[22m[32massets/CraftStockManager-DeVM7-a8.png  [39m[1m[2m  296.78 kB[22m[1m[22m
+[2mdist/[22m[32massets/Resume-A4QVW_Pj.pdf             [39m[1m[2m  310.47 kB[22m[1m[22m
+[2mdist/[22m[32massets/SafeGuard-BnhoWw7N.png          [39m[1m[2m  595.01 kB[22m[1m[22m
+[2mdist/[22m[32massets/VedicAi-C4Zoi3rX.png            [39m[1m[2m  934.56 kB[22m[1m[22m
+[2mdist/[22m[32massets/FunnelFixPro-BM48SOzh.png       [39m[1m[2m1,086.26 kB[22m[1m[22m
+[2mdist/[22m[32massets/Homepage-DzFRIiyB.png           [39m[1m[2m1,595.76 kB[22m[1m[22m
+[2mdist/[22m[32massets/Vyoamax-BL82e8tn.png            [39m[1m[2m2,334.26 kB[22m[1m[22m
+[2mdist/[22m[35massets/index-CPS0dLsH.css              [39m[1m[2m   33.90 kB[22m[1m[22m[2m │ gzip:   6.91 kB[22m
+[2mdist/[22m[36massets/index-DYzNXEj3.js               [39m[1m[33m  559.97 kB[39m[22m[2m │ gzip: 171.01 kB[22m
+
+(!) Some chunks are larger than 500 kB after minification. Consider:
+- Using dynamic import() to code-split the application
+- Use build.rollupOptions.output.manualChunks to improve chunking: https://rollupjs.org/configuration-options/#output-manualchunks
+- Adjust chunk size limit for this warning via build.chunkSizeWarningLimit.
+[32m✓ built in 4.60s[39m
