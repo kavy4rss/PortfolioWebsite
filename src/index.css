@@ -1864,6 +1864,10 @@ body:not(.dark-mode) .carousel-glow {
     font-size: 2.2rem;
   }
 
+  .kn-header {
+    margin-bottom: 30px;
+  }
+
   .nav-links {
     gap: 1rem;
   }
@@ -1903,7 +1907,8 @@ body:not(.dark-mode) .carousel-glow {
   .kn-container,
   .kn-hero-section,
   .about-section,
-  .about-page {
+  .about-page,
+  .karma-navigator-page {
     padding: 1.5rem 5% !important;
   }
 
@@ -1918,8 +1923,14 @@ body:not(.dark-mode) .carousel-glow {
   .kn-feature-card,
   .highlight-card,
   .summary-card,
-  .info-card {
+  .info-card,
+  .glass-fx,
+  .kn-sale-container {
     padding: 1.5rem !important;
+  }
+
+  .kn-swiper {
+    height: 400px;
   }
 
   .project-title {
