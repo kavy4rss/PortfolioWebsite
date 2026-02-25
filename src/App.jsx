@@ -13,7 +13,30 @@ import FunnelFixPro from './pages/FunnelFixPro'
 import Vyoamax from './pages/Vyoamax'
 import CraftStockManager from './pages/CraftStockManager'
 import AcquireCheckout from './pages/AcquireCheckout'
+import PrivacyPolicy from './pages/PrivacyPolicy'
+import TermsOfService from './pages/TermsOfService'
 
+// Simple Footer for Legal Links
+const Footer = () => {
+    return (
+        <footer style={{
+            textAlign: 'center',
+            padding: '2rem',
+            borderTop: '1px solid rgba(0,0,0,0.1)',
+            marginTop: 'auto',
+            fontSize: '0.9rem',
+            display: 'flex',
+            justifyContent: 'center',
+            gap: '20px',
+            flexWrap: 'wrap'
+        }}>
+            <span style={{ color: 'var(--text-secondary)' }}>© 2026 Kavy Agrawal</span>
+            <Link to="/privacy-policy" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '500' }}>Privacy Policy</Link>
+            <Link to="/terms-of-service" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '500' }}>Terms of Service</Link>
+            <Link to="/contact" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '500' }}>Contact Us</Link>
+        </footer>
+    );
+};
 // Navigation Component to handle active states
 const Navigation = () => {
     const location = useLocation();
@@ -90,7 +113,10 @@ function App() {
                     <Route path="/vyoamax" element={<Vyoamax />} />
                     <Route path="/craftstockmanager" element={<CraftStockManager />} />
                     <Route path="/acquire" element={<AcquireCheckout />} />
+                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                    <Route path="/terms-of-service" element={<TermsOfService />} />
                 </Routes>
+                <Footer />
             </div>
         </BrowserRouter>
     )
