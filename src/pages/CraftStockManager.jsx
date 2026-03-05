@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import PaymentTrigger from '../PaymentTrigger';
 import '../index.css';
 
 // Importing local image for Craft Stock Manager
@@ -165,10 +166,11 @@ const CraftStockManager = () => {
                         <div className="sale-glow"></div>
                         <h3 className="sale-title">Acquire This Project</h3>
                         <p className="sale-description">This comprehensive inventory SaaS system is currently available. Elevate your operations today.</p>
-                        <Link to="/acquire" state={{ projectDetails: { title: "Craft Stock Manager", type: "Micro SaaS", price: 3500 } }} className="sale-button">
-                            <span>Acquire Here</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                        </Link>
+                        <PaymentTrigger
+                            projectDetails={{ title: "Craft Stock Manager", type: "Micro SaaS", price: 3500 }}
+                            buttonText="Acquire Here"
+                            className="sale-button"
+                        />
                     </div>
                 </motion.div>
             </div>

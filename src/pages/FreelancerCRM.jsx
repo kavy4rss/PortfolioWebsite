@@ -6,6 +6,7 @@ import 'swiper/css';
 import 'swiper/css/effect-cards';
 import 'swiper/css/pagination';
 import { EffectCards, Pagination, Autoplay } from 'swiper/modules';
+import PaymentTrigger from '../PaymentTrigger';
 import '../index.css';
 
 import FreelancerCRM2Img from '../assets/Freelancer_CRM/2.jpeg';
@@ -176,10 +177,11 @@ const FreelancerCRM = () => {
                         <div className="sale-glow"></div>
                         <h3 className="sale-title">Acquire This Project</h3>
                         <p className="sale-description">This comprehensive freelance management system is currently available. Elevate your business efficiency.</p>
-                        <Link to="/acquire" state={{ projectDetails: { title: "Freelancer CRM", type: "SaaS", price: 4500 } }} className="sale-button">
-                            <span>Acquire Here</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                        </Link>
+                        <PaymentTrigger
+                            projectDetails={{ title: "Freelancer CRM", type: "SaaS", price: 4500 }}
+                            buttonText="Acquire Here"
+                            className="sale-button"
+                        />
                     </div>
                 </motion.div>
             </div>

@@ -1,0 +1,313 @@
+.gateway-container {
+    padding-top: 6rem;
+    min-height: 100vh;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    padding-bottom: 4rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    position: relative;
+}
+
+.gateway-back-btn {
+    position: absolute;
+    top: 6rem;
+    left: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    color: #fff;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: 500;
+    transition: all 0.3s ease;
+}
+
+.gateway-back-btn:hover {
+    background: rgba(255, 255, 255, 0.1);
+}
+
+.gateway-header {
+    text-align: center;
+    margin-bottom: 3rem;
+    padding: 0 20px;
+}
+
+.gateway-header h1 {
+    font-size: 3rem;
+    font-weight: 800;
+    font-family: var(--font-heading);
+    background: linear-gradient(45deg, #FFD700, #FDB931);
+    -webkit-background-clip: text;
+    background-clip: text;
+    -webkit-text-fill-color: transparent;
+    margin-bottom: 1rem;
+}
+
+.gateway-header p {
+    color: #aaa;
+    font-size: 1.2rem;
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+.gateway-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(min(100%, 300px), 1fr));
+    gap: 2rem;
+    width: 100%;
+    max-width: 1000px;
+    padding: 0 20px;
+}
+
+.gateway-card {
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 24px;
+    padding: 2.5rem;
+}
+
+.gateway-card h2 {
+    font-size: 1.8rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+}
+
+.gateway-summary-header {
+    display: flex;
+    gap: 1rem;
+    margin-bottom: 2rem;
+}
+
+.gateway-project-img {
+    width: 80px;
+    height: 80px;
+    object-fit: cover;
+    border-radius: 12px;
+}
+
+.gateway-summary-header h3 {
+    font-size: 1.3rem;
+    font-weight: 600;
+    color: #fff;
+    margin: 0;
+}
+
+.gateway-type {
+    color: #FFD700;
+    font-size: 0.9rem;
+    margin-top: 4px;
+}
+
+.gateway-price-details {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+    color: #ddd;
+}
+
+.gateway-price-row {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    padding-bottom: 1rem;
+    margin-bottom: 0.5rem;
+    font-weight: 600;
+    font-size: 1.2rem;
+    color: #fff;
+}
+
+.gateway-price-total {
+    font-weight: 700;
+    font-size: 1.4rem;
+    border-bottom: none;
+}
+
+.gateway-inr {
+    color: #FFD700;
+}
+
+.gateway-secure-box {
+    margin-top: 2.5rem;
+    padding: 1.5rem;
+    background: rgba(255, 215, 0, 0.05);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 215, 0, 0.2);
+}
+
+.gateway-secure-box h4 {
+    color: #FFD700;
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+.gateway-secure-box p {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin: 0;
+    line-height: 1.5;
+}
+
+.gateway-alt-payment-box {
+    margin-top: 1.5rem;
+    padding: 1.5rem;
+    background: rgba(255, 255, 255, 0.03);
+    border-radius: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    text-align: center;
+}
+
+.gateway-alt-payment-box h4 {
+    color: #fff;
+    margin: 0 0 10px 0;
+    font-size: 1.1rem;
+}
+
+.gateway-alt-payment-box p {
+    color: #aaa;
+    font-size: 0.9rem;
+    margin-bottom: 1.5rem;
+    line-height: 1.5;
+}
+
+.gateway-alt-btn {
+    background: transparent;
+    border: 1px solid #FFD700;
+    color: #FFD700;
+    padding: 12px 20px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    width: 100%;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.gateway-alt-btn:hover {
+    background: rgba(255, 215, 0, 0.1);
+}
+
+.gateway-qr-card {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.gateway-subtitle {
+    color: #aaa;
+    margin-bottom: 2rem;
+    text-align: center;
+}
+
+.gateway-qr-wrapper {
+    background: #fff;
+    padding: 1.5rem;
+    border-radius: 20px;
+    margin-bottom: 2rem;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
+}
+
+.gateway-qr-wrapper img {
+    width: 250px;
+    height: 250px;
+}
+
+.gateway-instruction-box {
+    width: 100%;
+    margin-bottom: 2rem;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 1rem;
+    border-radius: 12px;
+    text-align: center;
+}
+
+.gateway-instruction-box p {
+    margin: 0;
+    color: #888;
+    font-size: 0.9rem;
+}
+
+.gateway-steps {
+    width: 100%;
+    margin-bottom: 2rem;
+}
+
+.gateway-step {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 1rem;
+}
+
+.gateway-step:last-child {
+    margin-bottom: 0;
+}
+
+.gateway-step-num {
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    background: #FFD700;
+    color: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    font-size: 14px;
+    flex-shrink: 0;
+}
+
+.gateway-step p {
+    margin: 0;
+    color: #ddd;
+}
+
+.gateway-pay-btn {
+    background: linear-gradient(45deg, #10b981, #059669);
+    color: white;
+    padding: 16px 32px;
+    border-radius: 12px;
+    font-size: 1.25rem;
+    font-weight: 700;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    cursor: pointer;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    box-shadow: 0 8px 25px rgba(16, 185, 129, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.2);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    text-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+.gateway-pay-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 12px 30px rgba(16, 185, 129, 0.6), inset 0 2px 0 rgba(255, 255, 255, 0.2);
+}
+
+.gateway-pay-btn:active {
+    transform: translateY(1px);
+    box-shadow: 0 4px 15px rgba(16, 185, 129, 0.4), inset 0 2px 0 rgba(255, 255, 255, 0.2);
+}
+
+.gateway-loading {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    background-color: #0a0a0a;
+    color: #ffffff;
+    font-size: 1.5rem;
+}

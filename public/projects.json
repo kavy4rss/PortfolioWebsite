@@ -1,0 +1,58 @@
+[
+    {
+        "title": "Freelancer CRM",
+        "img": "https://res.cloudinary.com/demo/image/upload/v1/Freelancer_CRM/Freelancer_CRM",
+        "summary": "An all-in-one CRM solution designed to empower freelancers by automating tedious administrative tasks. Built with a cutting-edge stack of Next.js and Neon Postgres, it offers seamless client management, project milestone tracking, and dynamic invoicing. Experience a focused workspace that turns complex business management into a simple, high-performance digital experience.",
+        "link": "/freelancer-crm",
+        "github": "https://github.com/Kavya-Agrawal/freelancer-crm",
+        "type": "SaaS",
+        "isFeatured": true,
+        "price": 4500
+    },
+    {
+        "title": "FunnelFixPro Agency Website",
+        "img": "https://res.cloudinary.com/demo/image/upload/v1/FunnelFixPro/FunnelFixPro",
+        "summary": "A professional agency website designed for FunnelFixPro, focusing on high-conversion funnel optimizations and marketing strategies. This platform showcases case studies, service offerings, and strategic solutions to help businesses scale their digital presence. Built with precision and high performance in mind, it provides a seamless user journey from discovery to consultation. A perfect digital storefront for an agency dedicated to fixing and scaling marketing funnels for maximum impact.",
+        "link": "/funnelfixpro",
+        "github": "https://github.com/Kavya-Agrawal/funnelfixpro",
+        "type": "Website",
+        "isFeatured": false
+    },
+    {
+        "title": "Vyoamax Event Organiser",
+        "img": "https://res.cloudinary.com/demo/image/upload/v1/Vyoamax/Vyoamax",
+        "summary": "Vyoamax is a dynamic event management platform built with React, designed to simplify the process of discovering and organizing events across various categories like Art, Music, and Business. The application features robust sorting and filtering capabilities, allowing users to prioritize events by date or title for a personalized experience. With its intuitive 'My events' section and multi-language support (English/Ukrainian), it provides a globally accessible solution for event planning and attendance. A high-performance web tool that turns complex schedule management into a smooth, interactive user journey.",
+        "link": "/vyoamax",
+        "github": "https://github.com/Kavya-Agrawal/vyoamax",
+        "type": "App",
+        "isFeatured": false,
+        "price": 1200
+    },
+    {
+        "title": "Craft Stock Manager",
+        "img": "https://res.cloudinary.com/demo/image/upload/v1/CraftStockManager/CraftStockManager",
+        "summary": "Craft Stock Manager is a specialized inventory management application designed to help artisans and small-scale manufacturers track their materials and finished products efficiently. The platform features real-time stock updates, supplier management, and low-level alerts to ensure your creative production never hits a bottleneck. Built as a high-performance web application, it offers a clean, intuitive dashboard that simplifies complex supply chain tracking for creative businesses. It's the ultimate tool for crafters looking to scale their operations with data-driven insights and organized inventory control.",
+        "link": "/craftstockmanager",
+        "github": "https://github.com/Kavya-Agrawal/craft-stock-manager",
+        "type": "Micro SaaS",
+        "isFeatured": true,
+        "price": 2800
+    },
+    {
+        "title": "Vedic AI Chatbot",
+        "img": "https://res.cloudinary.com/demo/image/upload/v1/Vedic_AI/VedicAi",
+        "link": "/karma-navigator",
+        "github": "/",
+        "type": "App",
+        "isFeatured": false
+    },
+    {
+        "title": "Safeguard AntiThreat Application",
+        "img": "https://res.cloudinary.com/demo/image/upload/v1/SafeGuard/SafeGuard",
+        "link": "/safeguard",
+        "github": "/",
+        "type": "Software",
+        "isFeatured": false,
+        "price": 500
+    }
+]

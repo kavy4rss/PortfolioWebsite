@@ -1,20 +1,19 @@
-import React, { useState } from 'react'
+import React, { useState, Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom'
 import './index.css'
-import Home from './pages/Home'
-import About from './pages/About'
-import Projects from './pages/Projects'
-import Hobbies from './pages/Hobbies'
-import Contact from './pages/Contact'
-import KarmaNavigator from './pages/VedicAI'
-import Safeguard from './pages/Safeguard'
-import FreelancerCRM from './pages/FreelancerCRM'
-import FunnelFixPro from './pages/FunnelFixPro'
-import Vyoamax from './pages/Vyoamax'
-import CraftStockManager from './pages/CraftStockManager'
-import AcquireCheckout from './pages/AcquireCheckout'
-import PrivacyPolicy from './pages/PrivacyPolicy'
-import TermsOfService from './pages/TermsOfService'
+const Home = lazy(() => import('./pages/Home'))
+const About = lazy(() => import('./pages/About'))
+const Projects = lazy(() => import('./pages/Projects'))
+const Hobbies = lazy(() => import('./pages/Hobbies'))
+const Contact = lazy(() => import('./pages/Contact'))
+const KarmaNavigator = lazy(() => import('./pages/VedicAi'))
+const Safeguard = lazy(() => import('./pages/Safeguard'))
+const FreelancerCRM = lazy(() => import('./pages/FreelancerCRM'))
+const FunnelFixPro = lazy(() => import('./pages/FunnelFixPro'))
+const Vyoamax = lazy(() => import('./pages/Vyoamax'))
+const CraftStockManager = lazy(() => import('./pages/CraftStockManager'))
+const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
+const TermsOfService = lazy(() => import('./pages/TermsOfService'))
 
 // Simple Footer for Legal Links
 const Footer = () => {
@@ -100,22 +99,23 @@ function App() {
         <BrowserRouter>
             <div className="app-wrapper">
                 <Navigation />
-                <Routes>
-                    <Route path="/" element={<Home />} />
-                    <Route path="/about" element={<About />} />
-                    <Route path="/projects" element={<Projects />} />
-                    <Route path="/hobbies" element={<Hobbies />} />
-                    <Route path="/contact" element={<Contact />} />
-                    <Route path="/karma-navigator" element={<KarmaNavigator />} />
-                    <Route path="/safeguard" element={<Safeguard />} />
-                    <Route path="/freelancer-crm" element={<FreelancerCRM />} />
-                    <Route path="/funnelfixpro" element={<FunnelFixPro />} />
-                    <Route path="/vyoamax" element={<Vyoamax />} />
-                    <Route path="/craftstockmanager" element={<CraftStockManager />} />
-                    <Route path="/acquire" element={<AcquireCheckout />} />
-                    <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                    <Route path="/terms-of-service" element={<TermsOfService />} />
-                </Routes>
+                <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw', background: '#0a0a0a', color: '#fff' }}><h2>Loading...</h2></div>}>
+                    <Routes>
+                        <Route path="/" element={<Home />} />
+                        <Route path="/about" element={<About />} />
+                        <Route path="/projects" element={<Projects />} />
+                        <Route path="/hobbies" element={<Hobbies />} />
+                        <Route path="/contact" element={<Contact />} />
+                        <Route path="/karma-navigator" element={<KarmaNavigator />} />
+                        <Route path="/safeguard" element={<Safeguard />} />
+                        <Route path="/freelancer-crm" element={<FreelancerCRM />} />
+                        <Route path="/funnelfixpro" element={<FunnelFixPro />} />
+                        <Route path="/vyoamax" element={<Vyoamax />} />
+                        <Route path="/craftstockmanager" element={<CraftStockManager />} />
+                        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                        <Route path="/terms-of-service" element={<TermsOfService />} />
+                    </Routes>
+                </Suspense>
                 <Footer />
             </div>
         </BrowserRouter>

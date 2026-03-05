@@ -1,6 +1,7 @@
 import React from 'react';
 import { motion } from 'framer-motion';
 import { Link } from 'react-router-dom';
+import PaymentTrigger from '../PaymentTrigger';
 import { Swiper, SwiperSlide } from 'swiper/react';
 import 'swiper/css';
 import 'swiper/css/effect-cards';
@@ -192,10 +193,11 @@ const KarmaNavigator = () => {
                         <div className="sale-glow"></div>
                         <h3 className="sale-title">Acquire This Project</h3>
                         <p className="sale-description">This premium frontend architecture is currently available for sale. Perfect for your next high-end AI Chatbot or astrology chatbot application.</p>
-                        <Link to="/acquire" state={{ projectDetails: { title: "Vedic AI Chatbot", type: "App", price: 2000 } }} className="sale-button">
-                            <span>Acquire Here</span>
-                            <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
-                        </Link>
+                        <PaymentTrigger
+                            projectDetails={{ title: "Vedic AI Chatbot", type: "App", price: 2000 }}
+                            buttonText="Acquire Here"
+                            className="sale-button"
+                        />
                     </div>
                 </motion.div>
             </div>
