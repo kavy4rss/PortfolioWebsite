@@ -10,7 +10,7 @@
 [[headers]]
   for = "/*"
   [headers.values]
-    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com https://pagead2.googlesyndication.com https://your-cdn.com; img-src 'self' data: https:; media-src 'self' https:; connect-src 'self' /.netlify/functions/process-payment;"
+    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com https://pagead2.googlesyndication.com; img-src 'self' data: https://ik.imagekit.io https:; media-src 'self' https:; connect-src 'self' https://ik.imagekit.io /.netlify/functions/process-payment;"
     X-Frame-Options = "DENY"
     X-XSS-Protection = "1; mode=block"
     X-Content-Type-Options = "nosniff"

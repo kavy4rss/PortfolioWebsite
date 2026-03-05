@@ -203,7 +203,7 @@ const SignalScout = () => {
                         </p>
                         <div style={{ display: 'flex', flexDirection: 'column', gap: '0.8rem', marginTop: '1.5rem' }}>
                             <a
-                                href="https://github.com/kavy4rss"
+                                href="https://github.com/kavy4rss/Signal-Scout_Public"
                                 target="_blank"
                                 rel="noopener noreferrer"
                                 style={{

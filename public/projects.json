@@ -1,8 +1,8 @@
 [
     {
         "title": "Signal Scout",
-        "img": "#",
-        "thumbnail": "#",
+        "img": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/SafeGuard-App.png",
+        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/SafeGuard-App.png",
         "summary": "A Chrome extension that acts as a noise-cancelling layer for the social web. Uses on-device Gemini Nano AI to score the credibility of posts in real-time, directly in your LinkedIn and X feeds — with zero data leaving your browser.",
         "link": "/signal-scout",
         "github": "https://github.com/kavy4rss",

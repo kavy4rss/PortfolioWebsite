@@ -4,26 +4,17 @@ import { Link } from 'react-router-dom'
 import '../index.css'
 
 // ------------------------------------------------------------------
-// ImageKit helper — appends optimisation params to live URLs.
-// Safely handles URLs that already contain query params (?updatedAt=...)
-// by appending with '&' instead of '?' to avoid double-question-marks.
-// Returns null for '#'/empty so the ImagePlaceholder activates.
-// ------------------------------------------------------------------
-const getOptimizedSrc = (src, width = 800, quality = 80) => {
-    if (!src || src === '#') return null;
-    // ImageKit already has ?updatedAt= — always use & to append tr params
-    const sep = src.includes('?') ? '&' : '?';
-    return `${src}${sep}tr=w-${width},q-${quality}`;
-};
-
-// ------------------------------------------------------------------
 // Resolve the correct image source from the project data.
 // Priority: thumbnail (ImageKit URL) > img (legacy) > null (placeholder)
+// IMPORTANT: Only accepts URLs starting with 'https://' — anything else
+// (e.g. '#', relative paths) returns null and triggers the Placeholder.
+// We do NOT append ?tr= params — ImageKit URLs from the CDN are pre-signed
+// with ?updatedAt= and adding extra params can break production delivery.
 // ------------------------------------------------------------------
 const resolveImageSrc = (project) => {
     const src = project.thumbnail || project.img || null;
-    if (!src || src === '#') return null;
-    return src;
+    if (!src || !src.startsWith('https://')) return null;
+    return src; // return the raw URL exactly as-is
 };
 
 // Shimmer skeleton loader
@@ -66,14 +57,13 @@ const ProjectCard = ({ project }) => {
     const [imageError, setImageError] = useState(false);
     const cardRef = useRef(null);
 
-    // Resolve the correct image source from thumbnail (ImageKit) or img (legacy)
-    const rawSrc = resolveImageSrc(project);
-    const isPlaceholder = !rawSrc;
-    const optimizedSrc = getOptimizedSrc(rawSrc, isFeatured ? 1200 : 800);
+    // Resolve URL — only real https:// URLs make it through
+    const resolvedSrc = resolveImageSrc(project);
+    const isPlaceholder = !resolvedSrc;
 
     // Dev-mode debug: log the exact URL being used for this card
     if (import.meta.env.DEV) {
-        console.log(`[ProjectCard] "${title}" — thumbnail: "${project.thumbnail}" | img: "${project.img}" → resolved: "${optimizedSrc}"`);
+        console.log(`[ProjectCard] "${title}" → resolved: "${resolvedSrc}"`);
     }
 
     useEffect(() => {
@@ -94,19 +84,23 @@ const ProjectCard = ({ project }) => {
         return () => observer.disconnect();
     }, []);
 
-    // Renders the correct image state: placeholder / real img
-    // NOTE: opacity is NOT set to 0 — cached images don't fire onLoad in some
-    // browsers, which would leave the image permanently invisible.
+    // Renders the correct image state: ImagePlaceholder OR real img.
+    // Guard: only renders <img> if resolvedSrc is a real https URL.
     const renderImage = (className, height = '220px') => {
         if (isPlaceholder || imageError) {
             return <ImagePlaceholder type={type} title={title} height={height} />;
         }
+        // https:// guard — belt-and-suspenders; resolveImageSrc already checks
+        if (!resolvedSrc.startsWith('https://')) {
+            return <SkeletonLoader height={height} />;
+        }
         return (
             <img
-                src={optimizedSrc}
+                src={resolvedSrc}
                 alt={`Custom ${type} Solution and App Development by Kavy Agrawal - ${title}`}
                 className={className}
                 loading="lazy"
+                crossOrigin="anonymous"
                 onError={() => setImageError(true)}
                 style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
             />
@@ -121,18 +115,18 @@ const ProjectCard = ({ project }) => {
             >
                 {isVisible ? (
                     <>
-                        <Link to={link} target="_blank" className="featured-img-link">
+                        <Link to={link} target={link.startsWith('/') ? '_self' : '_blank'} className="featured-img-link">
                             <div className="img-overlay" style={{ zIndex: 2 }}></div>
                             {renderImage('featured-img', '100%')}
                         </Link>
                         <div className="featured-content">
                             <span className="project-type">{type}</span>
-                            <Link to={link} target="_blank" className="hover:underline underline-offset-2">
+                            <Link to={link} target={link.startsWith('/') ? '_self' : '_blank'} className="hover:underline underline-offset-2">
                                 <h2 className="project-title">{title}</h2>
                             </Link>
                             <p className="project-summary">{summary}</p>
                             <div className="project-buttons">
-                                <Link to={link} target="_blank" className="visit-btn">Visit Project</Link>
+                                <Link to={link} target={link.startsWith('/') ? '_self' : '_blank'} className="visit-btn">Visit Project</Link>
                             </div>
                         </div>
                     </>
@@ -150,17 +144,17 @@ const ProjectCard = ({ project }) => {
         >
             {isVisible ? (
                 <>
-                    <Link to={link} target="_blank" className="project-img-link">
+                    <Link to={link} target={link.startsWith('/') ? '_self' : '_blank'} className="project-img-link">
                         <div className="img-overlay" style={{ zIndex: 2 }}></div>
                         {renderImage('project-img', '200px')}
                     </Link>
                     <div className="project-content">
                         <span className="project-type">{type}</span>
-                        <Link to={link} target="_blank" className="hover:underline underline-offset-2">
+                        <Link to={link} target={link.startsWith('/') ? '_self' : '_blank'} className="hover:underline underline-offset-2">
                             <h2 className="small-project-title">{title}</h2>
                         </Link>
                         <div className="project-buttons-small">
-                            <Link to={link} target="_blank" className="text-link">Visit</Link>
+                            <Link to={link} target={link.startsWith('/') ? '_self' : '_blank'} className="text-link">Visit</Link>
                         </div>
                     </div>
                 </>
@@ -191,7 +185,7 @@ function Projects() {
             });
     }, []);
 
-    const categories = ['All', 'Website', 'App', 'SaaS', 'Micro SaaS', 'Software'];
+    const categories = ['All', 'Website', 'App', 'SaaS', 'Micro SaaS', 'Software', 'Chrome Extension'];
 
     const filteredProjects = projectData.filter(proj => {
         const matchesFilter = filter === 'All' || proj.type === filter;
