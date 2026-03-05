@@ -5,12 +5,25 @@ import '../index.css'
 
 // ------------------------------------------------------------------
 // ImageKit helper — appends optimisation params to live URLs.
-// Returns '#' unchanged so skeleton activates when no real URL yet.
+// Safely handles URLs that already contain query params (?updatedAt=...)
+// by appending with '&' instead of '?' to avoid double-question-marks.
+// Returns null for '#'/empty so the ImagePlaceholder activates.
 // ------------------------------------------------------------------
 const getOptimizedSrc = (src, width = 800, quality = 80) => {
-    if (!src || src === '#') return '#';
+    if (!src || src === '#') return null;
+    // ImageKit already has ?updatedAt= — always use & to append tr params
     const sep = src.includes('?') ? '&' : '?';
     return `${src}${sep}tr=w-${width},q-${quality}`;
+};
+
+// ------------------------------------------------------------------
+// Resolve the correct image source from the project data.
+// Priority: thumbnail (ImageKit URL) > img (legacy) > null (placeholder)
+// ------------------------------------------------------------------
+const resolveImageSrc = (project) => {
+    const src = project.thumbnail || project.img || null;
+    if (!src || src === '#') return null;
+    return src;
 };
 
 // Shimmer skeleton loader
@@ -18,23 +31,23 @@ const SkeletonLoader = ({ height = '220px', style = {} }) => (
     <div style={{
         width: '100%', height,
         borderRadius: '12px',
-        background: 'linear-gradient(90deg,rgba(255,255,255,0.04) 25%,rgba(255,255,255,0.09) 50%,rgba(255,255,255,0.04) 75%)',
+        background: 'linear-gradient(90deg,rgba(128,128,128,0.08) 25%,rgba(128,128,128,0.15) 50%,rgba(128,128,128,0.08) 75%)',
         backgroundSize: '200% 100%',
         animation: 'imagekit-shimmer 1.6s infinite linear',
         ...style
     }} />
 );
 
-// Fallback when src stays '#' or onError fires
+// Fallback when no URL is available or onError fires
 const ImagePlaceholder = ({ type, title, height = '220px' }) => (
     <div style={{
         width: '100%', height,
         borderRadius: '12px',
-        background: 'rgba(255,255,255,0.04)',
-        border: '1px dashed rgba(255,255,255,0.12)',
+        background: 'var(--bg-color, #f5f5f5)',
+        border: '1px dashed rgba(128,128,128,0.3)',
         display: 'flex', flexDirection: 'column',
         alignItems: 'center', justifyContent: 'center',
-        gap: '0.6rem', color: 'rgba(255,255,255,0.3)',
+        gap: '0.6rem', color: 'rgba(128,128,128,0.6)',
         fontSize: '0.85rem', fontWeight: 500
     }}>
         <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
@@ -48,14 +61,21 @@ const ImagePlaceholder = ({ type, title, height = '220px' }) => (
 
 // Lazy loaded project card component with Intersection Observer
 const ProjectCard = ({ project }) => {
-    const { title, type, summary, img, link, isFeatured } = project;
+    const { title, type, summary, link, isFeatured } = project;
     const [isVisible, setIsVisible] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
     const [imageError, setImageError] = useState(false);
     const cardRef = useRef(null);
 
-    const isPlaceholder = !img || img === '#';
-    const optimizedSrc = getOptimizedSrc(img, isFeatured ? 1200 : 800);
+    // Resolve the correct image source from thumbnail (ImageKit) or img (legacy)
+    const rawSrc = resolveImageSrc(project);
+    const isPlaceholder = !rawSrc;
+    const optimizedSrc = getOptimizedSrc(rawSrc, isFeatured ? 1200 : 800);
+
+    // Dev-mode debug: log the exact URL being used for this card
+    if (import.meta.env.DEV) {
+        console.log(`[ProjectCard] "${title}" — thumbnail: "${project.thumbnail}" | img: "${project.img}" → resolved: "${optimizedSrc}"`);
+    }
 
     useEffect(() => {
         const observer = new IntersectionObserver(
