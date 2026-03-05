@@ -7,6 +7,7 @@ import '../index.css'
 const ProjectCard = ({ project }) => {
     const { title, type, summary, img, link, isFeatured } = project;
     const [isVisible, setIsVisible] = useState(false);
+    const [imageLoaded, setImageLoaded] = useState(false);
     const cardRef = useRef(null);
 
     useEffect(() => {
@@ -32,9 +33,19 @@ const ProjectCard = ({ project }) => {
             <article ref={cardRef} className="featured-project-card">
                 {isVisible ? (
                     <>
-                        <Link to={link} target="_blank" className="featured-img-link">
-                            <div className="img-overlay"></div>
-                            <img src={img} alt={title} className="featured-img" loading="lazy" />
+                        <Link to={link} target="_blank" className="featured-img-link" style={{ position: 'relative' }}>
+                            <div className="img-overlay" style={{ zIndex: 2 }}></div>
+                            {!imageLoaded && (
+                                <div style={{ position: 'absolute', inset: 0, backgroundColor: '#1a1a1a', animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite', zIndex: 1 }}></div>
+                            )}
+                            <img
+                                src={img}
+                                alt={title}
+                                className="featured-img"
+                                loading="lazy"
+                                onLoad={() => setImageLoaded(true)}
+                                style={{ opacity: imageLoaded ? 1 : 0, transition: 'opacity 0.4s ease', position: 'relative', zIndex: 1 }}
+                            />
                         </Link>
                         <div className="featured-content">
                             <span className="project-type">{type}</span>
@@ -58,9 +69,19 @@ const ProjectCard = ({ project }) => {
         <article ref={cardRef} className="project-card">
             {isVisible ? (
                 <>
-                    <Link to={link} target="_blank" className="project-img-link">
-                        <div className="img-overlay"></div>
-                        <img src={img} alt={title} className="project-img" loading="lazy" />
+                    <Link to={link} target="_blank" className="project-img-link" style={{ position: 'relative' }}>
+                        <div className="img-overlay" style={{ zIndex: 2 }}></div>
+                        {!imageLoaded && (
+                            <div style={{ position: 'absolute', inset: 0, backgroundColor: '#1a1a1a', animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite', zIndex: 1 }}></div>
+                        )}
+                        <img
+                            src={img}
+                            alt={title}
+                            className="project-img"
+                            loading="lazy"
+                            onLoad={() => setImageLoaded(true)}
+                            style={{ opacity: imageLoaded ? 1 : 0, transition: 'opacity 0.4s ease', position: 'relative', zIndex: 1 }}
+                        />
                     </Link>
                     <div className="project-content">
                         <span className="project-type">{type}</span>
@@ -149,7 +170,7 @@ function Projects() {
                     ))}
                 </div>
             )}
-            
+
             {!isLoading && filteredProjects.length === 0 && (
                 <div className="no-projects">
                     <h3>No projects found in this category.</h3>

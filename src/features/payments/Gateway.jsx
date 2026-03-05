@@ -1,9 +1,11 @@
-import React from 'react';
-import { motion } from 'framer-motion';
+import React, { useState } from 'react';
+import { motion, useReducedMotion } from 'framer-motion';
 import QRCodeImg from '../../assets/Payment/QR Code.jpg';
 import './gateway.css';
 
 const Gateway = ({ projectData, paymentIntent, onBack }) => {
+    const shouldReduceMotion = useReducedMotion();
+    const [copied, setCopied] = useState(false);
     // Determine the WhatsApp number to use (prefer secure backend data, fallback to hardcoded)
     const WHATSAPP_NUMBER = paymentIntent?.paymentIntent?.whatsappNumber || '918467078545';
     // Get secure hash and TXN ID
@@ -38,9 +40,9 @@ const Gateway = ({ projectData, paymentIntent, onBack }) => {
                 ← Back
             </button>
             <motion.div
-                initial={{ opacity: 0, y: 20 }}
+                initial={{ opacity: 0, y: shouldReduceMotion ? 0 : 20 }}
                 animate={{ opacity: 1, y: 0 }}
-                transition={{ duration: 0.5 }}
+                transition={{ duration: shouldReduceMotion ? 0 : 0.5 }}
                 className="gateway-header"
             >
                 <h1>Secure Checkout</h1>
@@ -50,9 +52,9 @@ const Gateway = ({ projectData, paymentIntent, onBack }) => {
             <div className="gateway-grid">
                 {/* Order Summary Column */}
                 <motion.div
-                    initial={{ opacity: 0, x: -20 }}
+                    initial={{ opacity: 0, x: shouldReduceMotion ? 0 : -20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.2 }}
+                    transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : 0.2 }}
                     className="gateway-card"
                 >
                     <h2>Order Summary</h2>
@@ -63,6 +65,27 @@ const Gateway = ({ projectData, paymentIntent, onBack }) => {
                         <div>
                             <h3>{projectData.title}</h3>
                             <p className="gateway-type">{projectData.type || 'Premium Project'}</p>
+                        </div>
+                    </div>
+
+                    {secureHash !== 'LOCAL_UNVERIFIED' && (
+                        <div style={{ backgroundColor: '#052e16', color: '#4ade80', padding: '0.5rem 1rem', borderRadius: '0.5rem', marginTop: '1rem', display: 'flex', alignItems: 'center', gap: '0.5rem', fontSize: '0.875rem' }}>
+                            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2"><path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path><polyline points="22 4 12 14.01 9 11.01"></polyline></svg>
+                            Verified Transaction
+                        </div>
+                    )}
+
+                    <div style={{ backgroundColor: '#1a1a1a', border: '1px dashed #333', padding: '1rem', borderRadius: '0.5rem', marginTop: '1rem', marginBottom: '1rem', fontFamily: 'monospace' }}>
+                        <div style={{ color: '#888', marginBottom: '0.25rem', fontSize: '0.75rem' }}>RECEIPT / TXN ID</div>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center' }}>
+                            <span style={{ fontSize: '1.1rem', color: '#e5e5e5' }}>{txnId}</span>
+                            <button onClick={() => {
+                                navigator.clipboard.writeText(txnId);
+                                setCopied(true);
+                                setTimeout(() => setCopied(false), 2000);
+                            }} style={{ background: '#333', border: 'none', color: '#fff', padding: '0.25rem 0.5rem', borderRadius: '0.25rem', cursor: 'pointer', fontSize: '0.75rem' }}>
+                                {copied ? 'Copied!' : 'Copy'}
+                            </button>
                         </div>
                     </div>
 
@@ -97,9 +120,9 @@ const Gateway = ({ projectData, paymentIntent, onBack }) => {
 
                 {/* Payment Column */}
                 <motion.div
-                    initial={{ opacity: 0, x: 20 }}
+                    initial={{ opacity: 0, x: shouldReduceMotion ? 0 : 20 }}
                     animate={{ opacity: 1, x: 0 }}
-                    transition={{ duration: 0.5, delay: 0.3 }}
+                    transition={{ duration: shouldReduceMotion ? 0 : 0.5, delay: shouldReduceMotion ? 0 : 0.3 }}
                     className="gateway-card gateway-qr-card"
                 >
                     <h2>Scan to Pay</h2>

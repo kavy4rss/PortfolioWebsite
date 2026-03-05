@@ -15,11 +15,12 @@ exports.handler = async (event, context) => {
         // Generate a secure transaction ID
         const transactionId = 'TXN-' + Math.random().toString(36).substr(2, 9).toUpperCase();
 
-        // Simulate cryptographic hashing for payment validation
-        const hash = Buffer.from(`${transactionId}-${price}-${Date.now()}`).toString('base64');
-
         // Simulated secret keys or backend-only logic can be placed here safely
-        const WHATSAPP_NUMBER = '918467078545'; // Hardcoded number previously on client
+        const WHATSAPP_NUMBER = process.env.WHATSAPP_NUMBER || '918467078545';
+        const GATEWAY_SECRET = process.env.GATEWAY_SECRET || 'default_secret';
+
+        // Simulate cryptographic hashing for payment validation
+        const hash = Buffer.from(`${transactionId}-${price}-${Date.now()}-${GATEWAY_SECRET}`).toString('base64');
 
         // Simulate a delay for processing the heavy payment logic
         await new Promise(resolve => setTimeout(resolve, 800));
@@ -39,7 +40,10 @@ exports.handler = async (event, context) => {
             })
         };
     } catch (error) {
-        console.error('Payment processing error:', error);
+        // Custom Logger for production error tracking instead of standard console bounds
+        const customLogger = (msg, err) => process.stdout.write(`[PAYMENT_API_ERROR] ${new Date().toISOString()} - ${msg} - ${err}\n`);
+        customLogger('Payment processing error', error);
+
         return {
             statusCode: 400,
             body: JSON.stringify({ success: false, error: 'Invalid request data' })

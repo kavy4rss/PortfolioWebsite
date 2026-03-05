@@ -1,5 +1,6 @@
 import React, { useState, Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom'
+import { PaymentProvider } from './context/PaymentContext'
 import './index.css'
 const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
@@ -96,29 +97,31 @@ const Navigation = () => {
 
 function App() {
     return (
-        <BrowserRouter>
-            <div className="app-wrapper">
-                <Navigation />
-                <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw', background: '#0a0a0a', color: '#fff' }}><h2>Loading...</h2></div>}>
-                    <Routes>
-                        <Route path="/" element={<Home />} />
-                        <Route path="/about" element={<About />} />
-                        <Route path="/projects" element={<Projects />} />
-                        <Route path="/hobbies" element={<Hobbies />} />
-                        <Route path="/contact" element={<Contact />} />
-                        <Route path="/karma-navigator" element={<KarmaNavigator />} />
-                        <Route path="/safeguard" element={<Safeguard />} />
-                        <Route path="/freelancer-crm" element={<FreelancerCRM />} />
-                        <Route path="/funnelfixpro" element={<FunnelFixPro />} />
-                        <Route path="/vyoamax" element={<Vyoamax />} />
-                        <Route path="/craftstockmanager" element={<CraftStockManager />} />
-                        <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                        <Route path="/terms-of-service" element={<TermsOfService />} />
-                    </Routes>
-                </Suspense>
-                <Footer />
-            </div>
-        </BrowserRouter>
+        <PaymentProvider>
+            <BrowserRouter>
+                <div className="app-wrapper">
+                    <Navigation />
+                    <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw', background: '#0a0a0a', color: '#fff' }}><h2>Loading...</h2></div>}>
+                        <Routes>
+                            <Route path="/" element={<Home />} />
+                            <Route path="/about" element={<About />} />
+                            <Route path="/projects" element={<Projects />} />
+                            <Route path="/hobbies" element={<Hobbies />} />
+                            <Route path="/contact" element={<Contact />} />
+                            <Route path="/karma-navigator" element={<KarmaNavigator />} />
+                            <Route path="/safeguard" element={<Safeguard />} />
+                            <Route path="/freelancer-crm" element={<FreelancerCRM />} />
+                            <Route path="/funnelfixpro" element={<FunnelFixPro />} />
+                            <Route path="/vyoamax" element={<Vyoamax />} />
+                            <Route path="/craftstockmanager" element={<CraftStockManager />} />
+                            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+                            <Route path="/terms-of-service" element={<TermsOfService />} />
+                        </Routes>
+                    </Suspense>
+                    <Footer />
+                </div>
+            </BrowserRouter>
+        </PaymentProvider>
     )
 }
 
