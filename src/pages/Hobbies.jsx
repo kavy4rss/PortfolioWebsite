@@ -30,12 +30,12 @@ const saasImages = [
 ];
 
 
-// 4. Music playlist data — src will be updated with ImageKit/CDN URLs
+// 4. Premium Music Library Playlist (ImageKit CDN)
 const playlist = [
-    { title: "Deewaana Deewaana", artist: "A.R. Rahman", duration: "5:04", src: "#" },
-    { title: "Lutt Le Gaya", artist: "Shashwat Sachdev", duration: "3:40", src: "#" },
-    { title: "Ranjheya Ve", artist: "Zain Zohaib", duration: "4:24", src: "#" },
-    { title: "Rola Yaara Kaa", artist: "Masoom Sharma", duration: "3:24", src: "#" }
+    { title: "Deewana Deewana", artist: "A.R. Rahman", duration: "5:04", src: "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Music-Library/Deewana-Deewana.mp3" },
+    { title: "Ranjheya Ve", artist: "Zain Zohaib", duration: "4:24", src: "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Music-Library/Ranjheya-Ve.mp3" },
+    { title: "Yaara Rola Ka", artist: "Masoom Sharma", duration: "3:24", src: "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Music-Library/Yaara-Rola_Ka.mp3" },
+    { title: "Lutt Le Gaya", artist: "Shashwat Sachdev", duration: "3:40", src: "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Music-Library/Lutt-Le-Gaya.mp3" }
 ];
 
 // 5. Gaming Icons (Valorant, Roblox, Free Fire, GTA 5)
@@ -99,16 +99,81 @@ const HobbyBlock = ({ title, description, images, ratioClass, reverse, isIconMod
     );
 };
 
-// Premium Custom Music Player Block
+// Premium Custom Music Player Block with Native Engine
 const MusicPlayerBlock = ({ title, description, reverse }) => {
     const [currentSongIndex, setCurrentSongIndex] = useState(0);
     const [isPlaying, setIsPlaying] = useState(false);
-    const [playedFraction, setPlayedFraction] = useState(0);
-    const playerRef = useRef(null);
+    const [currentTime, setCurrentTime] = useState(0);
+    const [duration, setDuration] = useState(0);
+    const [isLoading, setIsLoading] = useState(false);
 
-    const togglePlay = () => {
-        setIsPlaying(!isPlaying);
-    };
+    // Persistent Native Audio Engine
+    const audioRef = useRef(null);
+
+    useEffect(() => {
+        // Initialize engine if it doesn't exist
+        if (!audioRef.current) {
+            audioRef.current = new Audio();
+        }
+
+        const audio = audioRef.current;
+        const currentSong = playlist[currentSongIndex];
+
+        // Stop current playing audio
+        audio.pause();
+        audio.src = currentSong.src;
+        audio.load();
+
+        if (isPlaying) {
+            setIsLoading(true);
+            audio.play()
+                .then(() => setIsLoading(false))
+                .catch(e => {
+                    console.error("Audio play failed:", e);
+                    setIsLoading(false);
+                    setIsPlaying(false);
+                });
+        }
+
+        // --- Event Listeners ---
+        const handleTimeUpdate = () => setCurrentTime(audio.currentTime);
+        const handleLoadedMetadata = () => {
+            setDuration(audio.duration);
+            setIsLoading(false);
+        };
+        const handleEnded = () => playNext();
+        const handleWaiting = () => setIsLoading(true);
+        const handlePlaying = () => setIsLoading(false);
+
+        audio.addEventListener('timeupdate', handleTimeUpdate);
+        audio.addEventListener('loadedmetadata', handleLoadedMetadata);
+        audio.addEventListener('ended', handleEnded);
+        audio.addEventListener('waiting', handleWaiting);
+        audio.addEventListener('playing', handlePlaying);
+
+        return () => {
+            audio.removeEventListener('timeupdate', handleTimeUpdate);
+            audio.removeEventListener('loadedmetadata', handleLoadedMetadata);
+            audio.removeEventListener('ended', handleEnded);
+            audio.removeEventListener('waiting', handleWaiting);
+            audio.removeEventListener('playing', handlePlaying);
+        };
+    }, [currentSongIndex]);
+
+    // Independent Play/Pause Sync
+    useEffect(() => {
+        const audio = audioRef.current;
+        if (!audio) return;
+
+        if (isPlaying && audio.paused) {
+            setIsLoading(true);
+            audio.play().catch(() => setIsPlaying(false)).finally(() => setIsLoading(false));
+        } else if (!isPlaying && !audio.paused) {
+            audio.pause();
+        }
+    }, [isPlaying]);
+
+    const togglePlay = () => setIsPlaying(!isPlaying);
 
     const playSong = (index) => {
         if (currentSongIndex === index) {
@@ -116,41 +181,38 @@ const MusicPlayerBlock = ({ title, description, reverse }) => {
         } else {
             setCurrentSongIndex(index);
             setIsPlaying(true);
-            setPlayedFraction(0);
+            setIsLoading(true);
         }
     };
 
     const playNext = () => {
-        if (currentSongIndex < playlist.length - 1) {
-            playSong(currentSongIndex + 1);
-        } else {
-            setCurrentSongIndex(0);
-            setIsPlaying(false);
-            setPlayedFraction(0);
-        }
+        const nextIndex = currentSongIndex < playlist.length - 1 ? currentSongIndex + 1 : 0;
+        playSong(nextIndex);
     };
 
     const playPrev = () => {
-        if (currentSongIndex > 0) {
-            playSong(currentSongIndex - 1);
-        }
-    };
-
-    const handleProgress = (state) => {
-        if (isPlaying) {
-            setPlayedFraction(state.played);
+        if (audioRef.current && audioRef.current.currentTime > 3) {
+            // If more than 3 sec in, just restart song
+            audioRef.current.currentTime = 0;
+        } else {
+            const prevIndex = currentSongIndex > 0 ? currentSongIndex - 1 : playlist.length - 1;
+            playSong(prevIndex);
         }
     };
 
     const handleSeek = (e) => {
-        const rect = e.currentTarget.getBoundingClientRect();
-        const clickX = e.clientX - rect.left;
-        const newPlayedFraction = Math.max(0, Math.min(1, clickX / rect.width));
-        setPlayedFraction(newPlayedFraction);
-        if (playerRef.current) {
-            playerRef.current.seekTo(newPlayedFraction, 'fraction');
-            setIsPlaying(true);
+        const newTime = parseFloat(e.target.value);
+        setCurrentTime(newTime);
+        if (audioRef.current) {
+            audioRef.current.currentTime = newTime;
         }
+    };
+
+    const formatTime = (time) => {
+        if (isNaN(time)) return "0:00";
+        const minutes = Math.floor(time / 60);
+        const seconds = Math.floor(time % 60);
+        return `${minutes}:${seconds < 10 ? '0' : ''}${seconds}`;
     };
 
     const currentSong = playlist[currentSongIndex];
@@ -188,42 +250,36 @@ const MusicPlayerBlock = ({ title, description, reverse }) => {
                     borderRadius: '24px',
                     padding: '2rem',
                     color: '#ffffff',
-                    boxShadow: '0 20px 40px rgba(0,0,0,0.2)'
+                    boxShadow: '0 20px 40px rgba(0,0,0,0.2)',
+                    position: 'relative',
+                    overflow: 'hidden',
+                    pointerEvents: 'auto' // ensure it's clickable regardless of heroes
                 }}>
-                    <div style={{ position: 'absolute', opacity: 0, pointerEvents: 'none' }}>
-                        <ReactPlayer
-                            ref={playerRef}
-                            url={currentSong.src}
-                            playing={isPlaying}
-                            onEnded={playNext}
-                            onProgress={handleProgress}
-                            width="10px"
-                            height="10px"
-                            volume={1}
-                            config={{
-                                file: {
-                                    forceAudio: true,
-                                }
-                            }}
-                        />
-                    </div>
+
+                    {/* Loading Overlay */}
+                    {isLoading && (
+                        <div style={{ position: 'absolute', top: 0, left: 0, right: 0, height: '3px', background: 'rgba(212, 175, 55, 0.2)', overflow: 'hidden' }}>
+                            <div className="music-loader-bar" style={{ height: '100%', width: '30%', background: '#D4AF37', animation: 'music-loading 1.5s infinite linear' }}></div>
+                        </div>
+                    )}
 
                     <div style={{ display: 'flex', alignItems: 'center', gap: '1.5rem', marginBottom: '2rem' }}>
                         <div style={{
                             width: '100px', height: '100px', borderRadius: '50%', background: 'conic-gradient(#D4AF37, #f39c12, #D4AF37)',
-                            animation: isPlaying ? 'spin 4s linear infinite' : 'none', border: '5px solid #111', display: 'flex', alignItems: 'center', justifyContent: 'center',
-                            transition: 'all 0.3s'
+                            animation: isPlaying && !isLoading ? 'spin 4s linear infinite' : 'none',
+                            border: '5px solid #111', display: 'flex', alignItems: 'center', justifyContent: 'center',
+                            transition: 'all 0.3s', flexShrink: 0
                         }}>
                             <div style={{ width: '30px', height: '30px', background: '#111', borderRadius: '50%' }}></div>
                         </div>
-                        <div style={{ flex: 1 }}>
-                            <h3 style={{ fontSize: '1.4rem', fontWeight: 700, margin: 0 }}>{currentSong.title}</h3>
+                        <div style={{ flex: 1, minWidth: 0 }}>
+                            <h3 style={{ fontSize: '1.4rem', fontWeight: 700, margin: 0, whiteSpace: 'nowrap', overflow: 'hidden', textOverflow: 'ellipsis' }}>{currentSong.title}</h3>
                             <p style={{ color: '#aaa', margin: '4px 0 10px 0', fontSize: '0.9rem' }}>{currentSong.artist}</p>
 
-                            <div style={{ display: 'flex', gap: '10px', alignItems: 'center' }}>
+                            <div style={{ display: 'flex', gap: '15px', alignItems: 'center' }}>
                                 <button
                                     onClick={playPrev}
-                                    style={{ background: 'transparent', color: '#D4AF37', border: 'none', cursor: currentSongIndex > 0 ? 'pointer' : 'not-allowed', padding: 0, opacity: currentSongIndex > 0 ? 1 : 0.5 }}
+                                    style={{ background: 'transparent', color: '#D4AF37', border: 'none', cursor: 'pointer', padding: 0 }}
                                     className="hover:scale-110 transition-transform"
                                 >
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 6h2v12H6zm3.5 6l8.5 6V6z" /></svg>
@@ -231,19 +287,20 @@ const MusicPlayerBlock = ({ title, description, reverse }) => {
 
                                 <button
                                     onClick={togglePlay}
-                                    style={{ background: '#D4AF37', color: '#111', border: 'none', borderRadius: '50%', width: '36px', height: '36px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: 'pointer' }}
+                                    disabled={isLoading}
+                                    style={{ background: '#D4AF37', color: '#111', border: 'none', borderRadius: '50%', width: '40px', height: '40px', display: 'flex', alignItems: 'center', justifyContent: 'center', cursor: isLoading ? 'wait' : 'pointer', opacity: isLoading ? 0.7 : 1 }}
                                     className="hover:scale-110 transition-transform"
                                 >
                                     {isPlaying ? (
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zm8 0h4v16h-4z" /></svg>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M6 4h4v16H6zm8 0h4v16h-4z" /></svg>
                                     ) : (
-                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
+                                        <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><path d="M8 5v14l11-7z" /></svg>
                                     )}
                                 </button>
 
                                 <button
                                     onClick={playNext}
-                                    style={{ background: 'transparent', color: '#D4AF37', border: 'none', cursor: currentSongIndex < playlist.length - 1 ? 'pointer' : 'not-allowed', padding: 0, opacity: currentSongIndex < playlist.length - 1 ? 1 : 0.5 }}
+                                    style={{ background: 'transparent', color: '#D4AF37', border: 'none', cursor: 'pointer', padding: 0 }}
                                     className="hover:scale-110 transition-transform"
                                 >
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor"><path d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z" /></svg>
@@ -252,58 +309,52 @@ const MusicPlayerBlock = ({ title, description, reverse }) => {
                         </div>
                     </div>
 
-                    {/* Progress Bar - fully functional */}
-                    <div
-                        onClick={handleSeek}
-                        style={{ width: '100%', height: '8px', background: 'rgba(255,255,255,0.1)', borderRadius: '4px', marginBottom: '1.5rem', position: 'relative', cursor: 'pointer' }}
-                    >
-                        <motion.div
-                            style={{
-                                height: '100%',
-                                background: '#D4AF37',
-                                borderRadius: '4px',
-                                width: `${playedFraction * 100}%`
-                            }}
-                        />
-                        <div style={{
-                            position: 'absolute',
-                            left: `calc(${playedFraction * 100}% - 6px)`,
-                            top: '-2px',
-                            width: '12px',
-                            height: '12px',
-                            background: '#fff',
-                            borderRadius: '50%',
-                            boxShadow: '0 0 10px rgba(255,255,255,0.5)',
-                            pointerEvents: 'none'
-                        }}></div>
+                    {/* Interactive Scrubbing Timeline */}
+                    <div style={{ marginBottom: '1.5rem' }}>
+                        <div style={{ display: 'flex', justifyContent: 'space-between', fontSize: '0.75rem', color: '#888', marginBottom: '8px', fontWeight: 600 }}>
+                            <span>{formatTime(currentTime)}</span>
+                            <span>{formatTime(duration)}</span>
+                        </div>
+                        <div className="music-timeline-container">
+                            <input
+                                type="range"
+                                min="0"
+                                max={duration || 100}
+                                value={currentTime}
+                                onChange={handleSeek}
+                                className="music-scrubber"
+                                style={{
+                                    background: `linear-gradient(to right, #D4AF37 ${(currentTime / (duration || 1)) * 100}%, rgba(255,255,255,0.1) ${(currentTime / (duration || 1)) * 100}%)`
+                                }}
+                            />
+                        </div>
                     </div>
 
                     {/* Playlist Sequence */}
-                    <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem' }}>
+                    <div style={{ display: 'flex', flexDirection: 'column', gap: '0.5rem' }}>
                         {playlist.map((song, i) => (
                             <div
                                 key={i}
                                 onClick={() => playSong(i)}
-                                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '10px 15px', background: currentSongIndex === i ? 'rgba(255,255,255,0.1)' : 'transparent', borderRadius: '12px', transition: 'all 0.3s', cursor: 'pointer' }}
-                                className="hover:bg-white/10"
+                                style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', padding: '12px 15px', background: currentSongIndex === i ? 'rgba(212, 175, 55, 0.1)' : 'transparent', border: currentSongIndex === i ? '1px solid rgba(212, 175, 55, 0.2)' : '1px solid transparent', borderRadius: '12px', transition: 'all 0.3s', cursor: 'pointer' }}
+                                className="hover:bg-white/5"
                             >
                                 <div style={{ display: 'flex', alignItems: 'center', gap: '15px' }}>
-                                    <div style={{ width: '30px', textAlign: 'center', color: currentSongIndex === i ? '#D4AF37' : '#666' }}>
+                                    <div style={{ width: '20px', textAlign: 'center', color: currentSongIndex === i ? '#D4AF37' : '#666' }}>
                                         {currentSongIndex === i && isPlaying ? (
-                                            <motion.div
-                                                animate={{ scale: [1, 1.2, 1] }}
-                                                transition={{ repeat: Infinity, duration: 1 }}
-                                            >
-                                                <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor"><path d="M12 3v10.55c-.59-.34-1.27-.55-2-.55-2.21 0-4 1.79-4 4s1.79 4 4 4 4-1.79 4-4V7h4V3h-6z" /></svg>
-                                            </motion.div>
-                                        ) : i + 1}
+                                            <div className="music-playing-bars">
+                                                <span></span><span></span><span></span>
+                                            </div>
+                                        ) : (
+                                            <span style={{ fontSize: '0.9rem', fontWeight: 600 }}>{i + 1}</span>
+                                        )}
                                     </div>
                                     <div>
-                                        <h4 style={{ margin: 0, fontSize: '1rem', color: currentSongIndex === i ? '#fff' : '#ccc', fontWeight: 600 }}>{song.title}</h4>
-                                        <p style={{ margin: 0, fontSize: '0.8rem', color: '#888' }}>{song.artist}</p>
+                                        <h4 style={{ margin: 0, fontSize: '0.95rem', color: currentSongIndex === i ? '#fff' : '#ccc', fontWeight: currentSongIndex === i ? 700 : 500 }}>{song.title}</h4>
+                                        <p style={{ margin: '2px 0 0 0', fontSize: '0.8rem', color: '#777' }}>{song.artist}</p>
                                     </div>
                                 </div>
-                                <span style={{ color: '#888', fontSize: '0.9rem' }}>{song.duration}</span>
+                                <span style={{ color: currentSongIndex === i ? '#D4AF37' : '#666', fontSize: '0.85rem', fontWeight: 600 }}>{song.duration}</span>
                             </div>
                         ))}
                     </div>
