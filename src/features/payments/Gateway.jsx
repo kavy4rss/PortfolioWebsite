@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 import QRCodeImg from '../../assets/Payment/QR Code.jpg';
 import './gateway.css';
@@ -6,6 +6,14 @@ import './gateway.css';
 const Gateway = ({ projectData, paymentIntent, onBack }) => {
     const shouldReduceMotion = useReducedMotion();
     const [copied, setCopied] = useState(false);
+
+    useEffect(() => {
+        // Prevent background scrolling while Gateway is active
+        document.body.style.overflow = "hidden";
+        return () => {
+            document.body.style.overflow = "unset";
+        };
+    }, []);
     // Determine the WhatsApp number to use (prefer secure backend data, fallback to hardcoded)
     const WHATSAPP_NUMBER = paymentIntent?.paymentIntent?.whatsappNumber || '918467078545';
     // Get secure hash and TXN ID
@@ -35,7 +43,7 @@ const Gateway = ({ projectData, paymentIntent, onBack }) => {
     };
 
     return (
-        <div className="gateway-container">
+        <div className="gateway-container" style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', zIndex: 9999, backgroundColor: 'rgba(10, 10, 10, 0.95)', backdropFilter: 'blur(8px)', overflowY: 'auto' }}>
             <button onClick={onBack} className="gateway-back-btn">
                 ← Back
             </button>

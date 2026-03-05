@@ -1,4 +1,5 @@
 import React, { useState, Suspense } from 'react';
+import { createPortal } from 'react-dom';
 import ErrorBoundary from './components/ErrorBoundary';
 import { usePayment } from './context/PaymentContext';
 
@@ -55,8 +56,7 @@ const PaymentTrigger = ({ projectDetails, buttonText = "Acquire Here", className
 
     const handleBack = () => {
         setGatewayComponent(null);
-        // Optionally, reset checkout intent if you truly want them to start over
-        // setPaymentIntent(null); 
+        setPaymentIntent(null);
     };
 
     // If there was an error with the fetch
@@ -72,14 +72,13 @@ const PaymentTrigger = ({ projectDetails, buttonText = "Acquire Here", className
 
     // If the Gateway is loaded, render it
     if (GatewayComponent) {
-        return (
-            <div style={{ position: 'fixed', top: 0, left: 0, width: '100%', height: '100%', zIndex: 9999, backgroundColor: '#0a0a0a', overflowY: 'auto' }}>
-                <ErrorBoundary>
-                    <Suspense fallback={<div className="min-h-screen flex items-center justify-center bg-black text-white">Loading Gateway...</div>}>
-                        <GatewayComponent projectData={projectDetails} paymentIntent={paymentIntent} onBack={handleBack} />
-                    </Suspense>
-                </ErrorBoundary>
-            </div>
+        return createPortal(
+            <ErrorBoundary>
+                <Suspense fallback={<div style={{ position: 'fixed', top: 0, left: 0, width: '100vw', height: '100vh', backgroundColor: 'rgba(10,10,10,0.95)', backdropFilter: 'blur(8px)', display: 'flex', alignItems: 'center', justifyContent: 'center', color: '#fff', zIndex: 9999 }}>Loading Gateway...</div>}>
+                    <GatewayComponent projectData={projectDetails} paymentIntent={paymentIntent} onBack={handleBack} />
+                </Suspense>
+            </ErrorBoundary>,
+            document.body
         );
     }
 
