@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom';
 import PaymentTrigger from '../PaymentTrigger';
 import '../index.css';
 
-// Importing local image for Vyoamax
-import VyoamaxImg from '../assets/Vyoamax/Vyoamax.png';
-
 const Vyoamax = () => {
     const [selectedImage, setSelectedImage] = useState(null);
 

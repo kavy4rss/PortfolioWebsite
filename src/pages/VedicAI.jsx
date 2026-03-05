@@ -8,10 +8,6 @@ import 'swiper/css/effect-cards';
 import 'swiper/css/pagination';
 import { EffectCards, Pagination, Autoplay } from 'swiper/modules';
 import '../index.css';
-import VedicAi1 from '../assets/Vedic_AI/1.jpeg';
-import VedicAi2 from '../assets/Vedic_AI/2.jpeg';
-import VedicAi3 from '../assets/Vedic_AI/3.jpeg';
-import VedicAi4 from '../assets/Vedic_AI/4.jpeg';
 
 const KarmaNavigator = () => {
     // Animation variants
@@ -171,19 +167,19 @@ const KarmaNavigator = () => {
                             className="kn-swiper"
                         >
                             <SwiperSlide className="kn-slide">
-                                <img src={VedicAi1} alt="Vedic AI Feature 1" className="kn-slide-img" loading="lazy" />
+                                <img src="https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Vedic-AI/1.jpeg?updatedAt=1772695009251" alt="Vedic AI Feature 1" className="kn-slide-img" loading="lazy" />
                                 <div className="slide-overlay"><span>Core Chat Interface</span></div>
                             </SwiperSlide>
                             <SwiperSlide className="kn-slide">
-                                <img src={VedicAi2} alt="Vedic AI Feature 2" className="kn-slide-img" loading="lazy" />
+                                <img src="https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Vedic-AI/2.jpeg?updatedAt=1772695009251" alt="Vedic AI Feature 2" className="kn-slide-img" loading="lazy" />
                                 <div className="slide-overlay"><span>Cosmic Brand Identity</span></div>
                             </SwiperSlide>
                             <SwiperSlide className="kn-slide">
-                                <img src={VedicAi3} alt="Vedic AI Feature 3" className="kn-slide-img" loading="lazy" />
+                                <img src="https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Vedic-AI/3.jpeg?updatedAt=1772695009251" alt="Vedic AI Feature 3" className="kn-slide-img" loading="lazy" />
                                 <div className="slide-overlay"><span>Data Visualizations</span></div>
                             </SwiperSlide>
                             <SwiperSlide className="kn-slide">
-                                <img src={VedicAi4} alt="Vedic AI Feature 4" className="kn-slide-img" loading="lazy" />
+                                <img src="https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Vedic-AI/4.jpeg?updatedAt=1772695009251" alt="Vedic AI Feature 4" className="kn-slide-img" loading="lazy" />
                                 <div className="slide-overlay"><span>Deep Space Theme</span></div>
                             </SwiperSlide>
                         </Swiper>

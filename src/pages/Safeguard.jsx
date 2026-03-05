@@ -9,14 +9,6 @@ import 'swiper/css/pagination';
 import { EffectCards, Pagination, Autoplay } from 'swiper/modules';
 import '../index.css';
 
-import SafeGuard1 from '../assets/SafeGuard/1.jpeg';
-import SafeGuard2 from '../assets/SafeGuard/2.jpeg';
-import SafeGuard3 from '../assets/SafeGuard/3.jpeg';
-import SafeGuard4 from '../assets/SafeGuard/4.jpeg';
-import SafeGuard5 from '../assets/SafeGuard/5.jpeg';
-import SafeGuard6 from '../assets/SafeGuard/6.jpeg';
-import SafeGuard7 from '../assets/SafeGuard/7.jpeg';
-
 const Safeguard = () => {
     // Animation variants
     const staggerContainer = {
@@ -218,31 +210,31 @@ const Safeguard = () => {
                             className="kn-swiper"
                         >
                             <SwiperSlide className="kn-slide">
-                                <img src={SafeGuard1} alt="Cyber Security Core" className="kn-slide-img" loading="lazy" />
+                                <img src="https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/SafeGuard-App/1.jpeg?updatedAt=1772694863415" alt="Cyber Security Core" className="kn-slide-img" loading="lazy" />
                                 <div className="slide-overlay"><span>Cyber Security Core</span></div>
                             </SwiperSlide>
                             <SwiperSlide className="kn-slide">
-                                <img src={SafeGuard2} alt="Live Financial Threat Interception" className="kn-slide-img" loading="lazy" />
+                                <img src="https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/SafeGuard-App/2.jpeg?updatedAt=1772694863415" alt="Live Financial Threat Interception" className="kn-slide-img" loading="lazy" />
                                 <div className="slide-overlay"><span>Live Financial Threat Interception</span></div>
                             </SwiperSlide>
                             <SwiperSlide className="kn-slide">
-                                <img src={SafeGuard3} alt="System-Wide Overlay Alerts" className="kn-slide-img" loading="lazy" />
+                                <img src="https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/SafeGuard-App/3.jpeg?updatedAt=1772694863415" alt="System-Wide Overlay Alerts" className="kn-slide-img" loading="lazy" />
                                 <div className="slide-overlay"><span>System-Wide Overlay Alerts</span></div>
                             </SwiperSlide>
                             <SwiperSlide className="kn-slide">
-                                <img src={SafeGuard4} alt="Gemini AI Vulnerability Scan" className="kn-slide-img" loading="lazy" />
+                                <img src="https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/SafeGuard-App/4.jpeg?updatedAt=1772694863415" alt="Gemini AI Vulnerability Scan" className="kn-slide-img" loading="lazy" />
                                 <div className="slide-overlay"><span>Gemini AI Vulnerability Scan</span></div>
                             </SwiperSlide>
                             <SwiperSlide className="kn-slide">
-                                <img src={SafeGuard5} alt="Deep Threat Analysis" className="kn-slide-img" loading="lazy" />
+                                <img src="https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/SafeGuard-App/5.jpeg?updatedAt=1772694863415" alt="Deep Threat Analysis" className="kn-slide-img" loading="lazy" />
                                 <div className="slide-overlay"><span>Deep Threat Analysis</span></div>
                             </SwiperSlide>
                             <SwiperSlide className="kn-slide">
-                                <img src={SafeGuard6} alt="Protection Dashboard" className="kn-slide-img" loading="lazy" />
+                                <img src="https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/SafeGuard-App/6.jpeg?updatedAt=1772694863415" alt="Protection Dashboard" className="kn-slide-img" loading="lazy" />
                                 <div className="slide-overlay"><span>Protection Dashboard</span></div>
                             </SwiperSlide>
                             <SwiperSlide className="kn-slide">
-                                <img src={SafeGuard7} alt="Network Insights" className="kn-slide-img" loading="lazy" />
+                                <img src="https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/SafeGuard-App/7.jpeg?updatedAt=1772694863415" alt="Network Insights" className="kn-slide-img" loading="lazy" />
                                 <div className="slide-overlay"><span>Network Insights</span></div>
                             </SwiperSlide>
                         </Swiper>

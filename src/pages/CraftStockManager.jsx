@@ -4,9 +4,6 @@ import { Link } from 'react-router-dom';
 import PaymentTrigger from '../PaymentTrigger';
 import '../index.css';
 
-// Importing local image for Craft Stock Manager
-import CraftStockManagerImg from '../assets/CraftStockManager/CraftStockManager.png';
-
 const CraftStockManager = () => {
     const [selectedImage, setSelectedImage] = useState(null);
 

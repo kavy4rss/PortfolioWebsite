@@ -1,7 +1,8 @@
 [
     {
         "title": "Freelancer CRM",
-        "img": "https://res.cloudinary.com/demo/image/upload/v1/Freelancer_CRM/Freelancer_CRM",
+        "img": "#",
+        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Freelancer-CRM.jpeg?updatedAt=1772694996527",
         "summary": "An all-in-one CRM solution designed to empower freelancers by automating tedious administrative tasks. Built with a cutting-edge stack of Next.js and Neon Postgres, it offers seamless client management, project milestone tracking, and dynamic invoicing. Experience a focused workspace that turns complex business management into a simple, high-performance digital experience.",
         "link": "/freelancer-crm",
         "github": "https://github.com/Kavya-Agrawal/freelancer-crm",
@@ -11,8 +12,9 @@
     },
     {
         "title": "FunnelFixPro Agency Website",
-        "img": "https://res.cloudinary.com/demo/image/upload/v1/FunnelFixPro/FunnelFixPro",
-        "summary": "A professional agency website designed for FunnelFixPro, focusing on high-conversion funnel optimizations and marketing strategies. This platform showcases case studies, service offerings, and strategic solutions to help businesses scale their digital presence. Built with precision and high performance in mind, it provides a seamless user journey from discovery to consultation. A perfect digital storefront for an agency dedicated to fixing and scaling marketing funnels for maximum impact.",
+        "img": "#",
+        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Funnel-Fix-Pro.png?updatedAt=1772694996672",
+        "summary": "A professional agency website designed for FunnelFixPro, focusing on high-conversion funnel optimizations and marketing strategies. This platform showcases case studies, service offerings, and strategic solutions to help businesses scale their digital presence.",
         "link": "/funnelfixpro",
         "github": "https://github.com/Kavya-Agrawal/funnelfixpro",
         "type": "Website",
@@ -20,8 +22,9 @@
     },
     {
         "title": "Vyoamax Event Organiser",
-        "img": "https://res.cloudinary.com/demo/image/upload/v1/Vyoamax/Vyoamax",
-        "summary": "Vyoamax is a dynamic event management platform built with React, designed to simplify the process of discovering and organizing events across various categories like Art, Music, and Business. The application features robust sorting and filtering capabilities, allowing users to prioritize events by date or title for a personalized experience. With its intuitive 'My events' section and multi-language support (English/Ukrainian), it provides a globally accessible solution for event planning and attendance. A high-performance web tool that turns complex schedule management into a smooth, interactive user journey.",
+        "img": "#",
+        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Vyoamax.png?updatedAt=1772694997216",
+        "summary": "Vyoamax is a dynamic event management platform built with React, designed to simplify the process of discovering and organizing events across various categories like Art, Music, and Business.",
         "link": "/vyoamax",
         "github": "https://github.com/Kavya-Agrawal/vyoamax",
         "type": "App",
@@ -30,8 +33,9 @@
     },
     {
         "title": "Craft Stock Manager",
-        "img": "https://res.cloudinary.com/demo/image/upload/v1/CraftStockManager/CraftStockManager",
-        "summary": "Craft Stock Manager is a specialized inventory management application designed to help artisans and small-scale manufacturers track their materials and finished products efficiently. The platform features real-time stock updates, supplier management, and low-level alerts to ensure your creative production never hits a bottleneck. Built as a high-performance web application, it offers a clean, intuitive dashboard that simplifies complex supply chain tracking for creative businesses. It's the ultimate tool for crafters looking to scale their operations with data-driven insights and organized inventory control.",
+        "img": "#",
+        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Craft-Stock-Manager.png?updatedAt=1772694995907",
+        "summary": "Craft Stock Manager is a specialized inventory management application designed to help artisans and small-scale manufacturers track their materials and finished products efficiently.",
         "link": "/craftstockmanager",
         "github": "https://github.com/Kavya-Agrawal/craft-stock-manager",
         "type": "Micro SaaS",
@@ -40,7 +44,8 @@
     },
     {
         "title": "Vedic AI Chatbot",
-        "img": "https://res.cloudinary.com/demo/image/upload/v1/Vedic_AI/VedicAi",
+        "img": "#",
+        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/VedicAI-App.png",
         "link": "/karma-navigator",
         "github": "/",
         "type": "App",
@@ -48,7 +53,8 @@
     },
     {
         "title": "Safeguard AntiThreat Application",
-        "img": "https://res.cloudinary.com/demo/image/upload/v1/SafeGuard/SafeGuard",
+        "img": "#",
+        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/SafeGuard-App.png?updatedAt=1772694997309",
         "link": "/safeguard",
         "github": "/",
         "type": "Software",

@@ -3,12 +3,59 @@ import { motion } from 'framer-motion'
 import { Link } from 'react-router-dom'
 import '../index.css'
 
+// ------------------------------------------------------------------
+// ImageKit helper — appends optimisation params to live URLs.
+// Returns '#' unchanged so skeleton activates when no real URL yet.
+// ------------------------------------------------------------------
+const getOptimizedSrc = (src, width = 800, quality = 80) => {
+    if (!src || src === '#') return '#';
+    const sep = src.includes('?') ? '&' : '?';
+    return `${src}${sep}tr=w-${width},q-${quality}`;
+};
+
+// Shimmer skeleton loader
+const SkeletonLoader = ({ height = '220px', style = {} }) => (
+    <div style={{
+        width: '100%', height,
+        borderRadius: '12px',
+        background: 'linear-gradient(90deg,rgba(255,255,255,0.04) 25%,rgba(255,255,255,0.09) 50%,rgba(255,255,255,0.04) 75%)',
+        backgroundSize: '200% 100%',
+        animation: 'imagekit-shimmer 1.6s infinite linear',
+        ...style
+    }} />
+);
+
+// Fallback when src stays '#' or onError fires
+const ImagePlaceholder = ({ type, title, height = '220px' }) => (
+    <div style={{
+        width: '100%', height,
+        borderRadius: '12px',
+        background: 'rgba(255,255,255,0.04)',
+        border: '1px dashed rgba(255,255,255,0.12)',
+        display: 'flex', flexDirection: 'column',
+        alignItems: 'center', justifyContent: 'center',
+        gap: '0.6rem', color: 'rgba(255,255,255,0.3)',
+        fontSize: '0.85rem', fontWeight: 500
+    }}>
+        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
+            <rect x="3" y="3" width="18" height="18" rx="2" />
+            <circle cx="8.5" cy="8.5" r="1.5" />
+            <polyline points="21 15 16 10 5 21" />
+        </svg>
+        Project Preview
+    </div>
+);
+
 // Lazy loaded project card component with Intersection Observer
 const ProjectCard = ({ project }) => {
     const { title, type, summary, img, link, isFeatured } = project;
     const [isVisible, setIsVisible] = useState(false);
     const [imageLoaded, setImageLoaded] = useState(false);
+    const [imageError, setImageError] = useState(false);
     const cardRef = useRef(null);
+
+    const isPlaceholder = !img || img === '#';
+    const optimizedSrc = getOptimizedSrc(img, isFeatured ? 1200 : 800);
 
     useEffect(() => {
         const observer = new IntersectionObserver(
@@ -28,24 +75,45 @@ const ProjectCard = ({ project }) => {
         return () => observer.disconnect();
     }, []);
 
+    // Renders the correct image state: placeholder / skeleton / real img
+    const renderImage = (className, height = '220px') => {
+        if (isPlaceholder || imageError) {
+            return <ImagePlaceholder type={type} title={title} height={height} />;
+        }
+        return (
+            <div style={{ position: 'relative', width: '100%' }}>
+                {!imageLoaded && (
+                    <SkeletonLoader height={height} style={{ position: 'absolute', top: 0, left: 0 }} />
+                )}
+                <img
+                    src={optimizedSrc}
+                    alt={`Custom ${type} Solution and App Development by Kavy Agrawal - ${title}`}
+                    className={className}
+                    loading="lazy"
+                    onLoad={() => setImageLoaded(true)}
+                    onError={() => setImageError(true)}
+                    style={{
+                        opacity: imageLoaded ? 1 : 0,
+                        transition: 'opacity 0.4s ease',
+                        position: 'relative', zIndex: 1,
+                        display: 'block', width: '100%'
+                    }}
+                />
+            </div>
+        );
+    };
+
     if (isFeatured) {
         return (
-            <motion.article whileHover={{ scale: 1.05, transition: { duration: 0.2 } }} ref={cardRef} className="featured-project-card">
+            <motion.article
+                whileHover={isPlaceholder ? {} : { scale: 1.01, transition: { duration: 0.2 } }}
+                ref={cardRef} className="featured-project-card"
+            >
                 {isVisible ? (
                     <>
-                        <Link to={link} target="_blank" className="featured-img-link" style={{ position: 'relative' }}>
+                        <Link to={link} target="_blank" className="featured-img-link">
                             <div className="img-overlay" style={{ zIndex: 2 }}></div>
-                            {!imageLoaded && (
-                                <div style={{ position: 'absolute', inset: 0, backgroundColor: '#1a1a1a', animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite', zIndex: 1 }}></div>
-                            )}
-                            <img
-                                src={img}
-                                alt={`Custom ${type} Solution and App Development by Kavy Agrawal - ${title}`}
-                                className="featured-img"
-                                loading="lazy"
-                                onLoad={() => setImageLoaded(true)}
-                                style={{ opacity: imageLoaded ? 1 : 0, transition: 'opacity 0.4s ease', position: 'relative', zIndex: 1 }}
-                            />
+                            {renderImage('featured-img', '100%')}
                         </Link>
                         <div className="featured-content">
                             <span className="project-type">{type}</span>
@@ -59,29 +127,22 @@ const ProjectCard = ({ project }) => {
                         </div>
                     </>
                 ) : (
-                    <div style={{ height: '400px', width: '100%', background: 'rgba(255,255,255,0.05)', borderRadius: '12px' }}></div>
+                    <SkeletonLoader height="400px" />
                 )}
             </motion.article>
         );
     }
 
     return (
-        <motion.article whileHover={{ scale: 1.05, transition: { duration: 0.2 } }} ref={cardRef} className="project-card">
+        <motion.article
+            whileHover={isPlaceholder ? {} : { scale: 1.05, transition: { duration: 0.2 } }}
+            ref={cardRef} className="project-card"
+        >
             {isVisible ? (
                 <>
-                    <Link to={link} target="_blank" className="project-img-link" style={{ position: 'relative' }}>
+                    <Link to={link} target="_blank" className="project-img-link">
                         <div className="img-overlay" style={{ zIndex: 2 }}></div>
-                        {!imageLoaded && (
-                            <div style={{ position: 'absolute', inset: 0, backgroundColor: '#1a1a1a', animation: 'pulse 2s cubic-bezier(0.4, 0, 0.6, 1) infinite', zIndex: 1 }}></div>
-                        )}
-                        <img
-                            src={img}
-                            alt={`Custom ${type} Solution and App Development by Kavy Agrawal - ${title}`}
-                            className="project-img"
-                            loading="lazy"
-                            onLoad={() => setImageLoaded(true)}
-                            style={{ opacity: imageLoaded ? 1 : 0, transition: 'opacity 0.4s ease', position: 'relative', zIndex: 1 }}
-                        />
+                        {renderImage('project-img', '200px')}
                     </Link>
                     <div className="project-content">
                         <span className="project-type">{type}</span>
@@ -94,7 +155,7 @@ const ProjectCard = ({ project }) => {
                     </div>
                 </>
             ) : (
-                <div style={{ height: '300px', width: '100%', background: 'rgba(255,255,255,0.05)', borderRadius: '12px' }}></div>
+                <SkeletonLoader height="300px" />
             )}
         </motion.article>
     );

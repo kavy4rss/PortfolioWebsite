@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
-import QRCodeImg from '../../assets/Payment/QR Code.jpg';
+// QR Code image: update this URL with your ImageKit link
+const QRCodeImg = '#';
 import './gateway.css';
 
 const Gateway = ({ projectData, paymentIntent, onBack }) => {

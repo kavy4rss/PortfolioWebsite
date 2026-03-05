@@ -29,17 +29,13 @@ const saasImages = [
     "https://images.unsplash.com/photo-1504868584819-f8e8b4bcafe4?w=1600&h=900&fit=crop&q=80"
 ];
 
-import song1 from '../assets/music/Deewana-Deewana.mp3';
-import song2 from '../assets/music/Lutt-Le-Gaya.mp3';
-import song3 from '../assets/music/Ranjheya-Ve.mp3';
-import song4 from '../assets/music/Yaara-Rola_Ka.mp3';
 
-// 4. Music playlist data
+// 4. Music playlist data — src will be updated with ImageKit/CDN URLs
 const playlist = [
-    { title: "Deewaana Deewaana", artist: "A.R. Rahman", duration: "5:04", src: song1 },
-    { title: "Lutt Le Gaya", artist: "Shashwat Sachdev", duration: "3:40", src: song2 },
-    { title: "Ranjheya Ve", artist: "Zain Zohaib", duration: "4:24", src: song3 },
-    { title: "Rola Yaara Kaa", artist: "Masoom Sharma", duration: "3:24", src: song4 }
+    { title: "Deewaana Deewaana", artist: "A.R. Rahman", duration: "5:04", src: "#" },
+    { title: "Lutt Le Gaya", artist: "Shashwat Sachdev", duration: "3:40", src: "#" },
+    { title: "Ranjheya Ve", artist: "Zain Zohaib", duration: "4:24", src: "#" },
+    { title: "Rola Yaara Kaa", artist: "Masoom Sharma", duration: "3:24", src: "#" }
 ];
 
 // 5. Gaming Icons (Valorant, Roblox, Free Fire, GTA 5)

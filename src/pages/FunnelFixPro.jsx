@@ -9,9 +9,6 @@ import 'swiper/css/pagination';
 import { EffectCards, Pagination, Autoplay } from 'swiper/modules';
 import '../index.css';
 
-// TODO: Update these image paths when they are available for Funnel Fix Pro
-import FunnelFixProImg from '../assets/FunnelFixPro/FunnelFixPro.png';
-
 const FunnelFixPro = () => {
     const [selectedImage, setSelectedImage] = useState(null);
 

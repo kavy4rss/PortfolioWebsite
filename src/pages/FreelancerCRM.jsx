@@ -9,12 +9,6 @@ import { EffectCards, Pagination, Autoplay } from 'swiper/modules';
 import PaymentTrigger from '../PaymentTrigger';
 import '../index.css';
 
-import FreelancerCRM2Img from '../assets/Freelancer_CRM/2.jpeg';
-import FreelancerCRM3Img from '../assets/Freelancer_CRM/3.jpeg';
-import FreelancerCRM4Img from '../assets/Freelancer_CRM/4.jpeg';
-import FreelancerCRM5Img from '../assets/Freelancer_CRM/5.jpeg';
-import FreelancerCRM6Img from '../assets/Freelancer_CRM/6.jpeg';
-
 const FreelancerCRM = () => {
     const [selectedImage, setSelectedImage] = useState(null);
 
