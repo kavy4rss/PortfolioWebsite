@@ -1,0 +1,7 @@
+
+C:\My-Website\src\pages\Projects.jsx
+  21:35  error  '_type' is defined but never used   no-unused-vars
+  21:49  error  '_title' is defined but never used  no-unused-vars
+
+✖ 2 problems (2 errors, 0 warnings)
+

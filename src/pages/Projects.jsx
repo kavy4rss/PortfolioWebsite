@@ -1,21 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion'
+import { motion } from 'framer-motion' // eslint-disable-line no-unused-vars
 import { Link } from 'react-router-dom'
 import '../index.css'
 
-// ------------------------------------------------------------------
-// Resolve the correct image source from the project data.
-// Priority: thumbnail (ImageKit URL) > img (legacy) > null (placeholder)
-// IMPORTANT: Only accepts URLs starting with 'https://' — anything else
-// (e.g. '#', relative paths) returns null and triggers the Placeholder.
-// We do NOT append ?tr= params — ImageKit URLs from the CDN are pre-signed
-// with ?updatedAt= and adding extra params can break production delivery.
-// ------------------------------------------------------------------
-const resolveImageSrc = (project) => {
-    const src = project.thumbnail || project.img || null;
-    if (!src || !src.startsWith('https://')) return null;
-    return src; // return the raw URL exactly as-is
-};
+// resolveImageSrc removed because it is no longer used
 
 // Shimmer skeleton loader
 const SkeletonLoader = ({ height = '220px', style = {} }) => (
@@ -30,7 +18,7 @@ const SkeletonLoader = ({ height = '220px', style = {} }) => (
 );
 
 // Fallback when no URL is available or onError fires
-const ImagePlaceholder = ({ type, title, height = '220px' }) => (
+const ImagePlaceholder = ({ height = '220px' }) => (
     <div style={{
         width: '100%', height,
         borderRadius: '12px',
@@ -104,7 +92,7 @@ const ProjectCard = ({ project }) => {
     if (isFeatured) {
         return (
             <motion.article
-                whileHover={isPlaceholder ? {} : { scale: 1.01, transition: { duration: 0.2 } }}
+                whileHover={!imageUrl ? {} : { scale: 1.01, transition: { duration: 0.2 } }}
                 ref={cardRef} className="featured-project-card"
             >
                 {isVisible ? (
@@ -133,7 +121,7 @@ const ProjectCard = ({ project }) => {
 
     return (
         <motion.article
-            whileHover={isPlaceholder ? {} : { scale: 1.05, transition: { duration: 0.2 } }}
+            whileHover={!imageUrl ? {} : { scale: 1.05, transition: { duration: 0.2 } }}
             ref={cardRef} className="project-card"
         >
             {isVisible ? (
