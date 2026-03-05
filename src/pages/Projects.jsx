@@ -57,9 +57,9 @@ const ProjectCard = ({ project }) => {
     const [imageError, setImageError] = useState(false);
     const cardRef = useRef(null);
 
-    // Resolve URL — only real https:// URLs make it through
-    const resolvedSrc = resolveImageSrc(project);
-    const isPlaceholder = !resolvedSrc;
+    // Resolve URL — ensure we don't trip on undefined thumbnail fields
+    const resolvedSrc = project.thumbnail || project.img || null;
+    const isPlaceholder = !resolvedSrc || resolvedSrc === '#';
 
     // Dev-mode debug: log the exact URL being used for this card
     if (import.meta.env.DEV) {
@@ -90,13 +90,13 @@ const ProjectCard = ({ project }) => {
         if (isPlaceholder || imageError) {
             return <ImagePlaceholder type={type} title={title} height={height} />;
         }
-        // https:// guard — belt-and-suspenders; resolveImageSrc already checks
-        if (!resolvedSrc.startsWith('https://')) {
+        // https:// guard
+        if (resolvedSrc && !resolvedSrc.startsWith('http')) {
             return <SkeletonLoader height={height} />;
         }
         return (
             <img
-                src={resolvedSrc}
+                src={resolvedSrc && resolvedSrc.startsWith('http') ? resolvedSrc : `/${resolvedSrc}`}
                 alt={`Custom ${type} Solution and App Development by Kavy Agrawal - ${title}`}
                 className={className}
                 loading="lazy"

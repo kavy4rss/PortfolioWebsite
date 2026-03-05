@@ -123,7 +123,7 @@ const AnimatedRoutes = () => {
                 <Route path="/craftstockmanager" element={<PageWrapper><CraftStockManager /></PageWrapper>} />
                 <Route path="/privacy-policy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
                 <Route path="/terms-of-service" element={<PageWrapper><TermsOfService /></PageWrapper>} />
-                <Route path="/signal-scout" element={<PageWrapper><SignalScout /></PageWrapper>} />
+                <Route path="/project/signal-scout" element={<PageWrapper><SignalScout /></PageWrapper>} />
                 <Route path="/signal-scout/guide" element={<PageWrapper><SignalScoutGuide /></PageWrapper>} />
                 <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
             </Routes>
