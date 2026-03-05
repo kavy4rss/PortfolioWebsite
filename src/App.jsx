@@ -131,7 +131,7 @@ function App() {
             <BrowserRouter>
                 <div className="app-wrapper">
                     <Navigation />
-                    <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw', background: '#0a0a0a', color: '#fff' }}><h2>Loading...</h2></div>}>
+                    <Suspense fallback={<div style={{ height: '100vh', width: '100vw', background: 'transparent' }} />}>
                         <AnimatedRoutes />
                     </Suspense>
                     <Footer />

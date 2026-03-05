@@ -40,7 +40,7 @@ const ProjectCard = ({ project }) => {
                             )}
                             <img
                                 src={img}
-                                alt={`Full Stack Developer Portfolio Project - ${title}`}
+                                alt={`Custom ${type} Solution and App Development by Kavy Agrawal - ${title}`}
                                 className="featured-img"
                                 loading="lazy"
                                 onLoad={() => setImageLoaded(true)}
@@ -76,7 +76,7 @@ const ProjectCard = ({ project }) => {
                         )}
                         <img
                             src={img}
-                            alt={`Full Stack Developer Portfolio Project - ${title}`}
+                            alt={`Custom ${type} Solution and App Development by Kavy Agrawal - ${title}`}
                             className="project-img"
                             loading="lazy"
                             onLoad={() => setImageLoaded(true)}
