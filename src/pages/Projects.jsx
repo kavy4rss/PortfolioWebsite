@@ -57,13 +57,12 @@ const ProjectCard = ({ project }) => {
     const [imageError, setImageError] = useState(false);
     const cardRef = useRef(null);
 
-    // Resolve URL — ensure we don't trip on undefined thumbnail fields
-    const resolvedSrc = project.thumbnail || project.img || null;
-    const isPlaceholder = !resolvedSrc || resolvedSrc === '#';
+    // Explicit Image Protocol Guard
+    const imageUrl = project.thumbnail?.startsWith('http') ? project.thumbnail : null;
 
     // Dev-mode debug: log the exact URL being used for this card
     if (import.meta.env.DEV) {
-        console.log(`[ProjectCard] "${title}" → resolved: "${resolvedSrc}"`);
+        console.log(`[ProjectCard] "${title}" → resolved: "${imageUrl}"`);
     }
 
     useEffect(() => {
@@ -84,19 +83,14 @@ const ProjectCard = ({ project }) => {
         return () => observer.disconnect();
     }, []);
 
-    // Renders the correct image state: ImagePlaceholder OR real img.
-    // Guard: only renders <img> if resolvedSrc is a real https URL.
+    // Simplified rendering strictly enforcing HTTP protocol
     const renderImage = (className, height = '220px') => {
-        if (isPlaceholder || imageError) {
-            return <ImagePlaceholder type={type} title={title} height={height} />;
-        }
-        // https:// guard
-        if (resolvedSrc && !resolvedSrc.startsWith('http')) {
+        if (!imageUrl || imageError) {
             return <SkeletonLoader height={height} />;
         }
         return (
             <img
-                src={resolvedSrc && resolvedSrc.startsWith('http') ? resolvedSrc : `/${resolvedSrc}`}
+                src={imageUrl}
                 alt={`Custom ${type} Solution and App Development by Kavy Agrawal - ${title}`}
                 className={className}
                 loading="lazy"
@@ -172,15 +166,21 @@ function Projects() {
     const [isLoading, setIsLoading] = useState(true);
 
     useEffect(() => {
-        // Fetch externalized project data (Simulated CDN Edge)
-        fetch('/projects.json')
-            .then(res => res.json())
+        // Robust fetch with cache busting
+        const timestamp = new Date().getTime();
+        const jsonUrl = `${window.location.origin}/projects.json?v=${timestamp}`;
+
+        fetch(jsonUrl)
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
+                return res.json();
+            })
             .then(data => {
                 setProjectData(data);
                 setIsLoading(false);
             })
             .catch(err => {
-                console.error("Failed to load projects", err);
+                console.error("[Data-to-UI Pipeline] Failed to load projects:", err.message, err);
                 setIsLoading(false);
             });
     }, []);
