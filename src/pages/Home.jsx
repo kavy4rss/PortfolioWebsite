@@ -9,11 +9,12 @@ function Home() {
     return (
         <main className="hero">
             <div className="container hero-grid">
-                <div className="hero-image-container">
+                <div className="hero-image-container" style={{ pointerEvents: 'none' }}>
                     <img
                         src={HomepagePic}
                         alt="Artistic Avatar"
                         className="hero-image"
+                        style={{ pointerEvents: 'none' }}
                     />
                 </div>
                 <div className="hero-content">

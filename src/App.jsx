@@ -33,7 +33,7 @@ const Footer = () => {
             gap: '20px',
             flexWrap: 'wrap',
             position: 'relative', /* establish stacking context */
-            zIndex: 50            /* sit above all page sections, including hero (z-index: 1) */
+            zIndex: 100           /* highest priority — footer links always clickable */
         }}>
             <span style={{ color: 'var(--text-secondary)' }}>© 2026 Kavy Agrawal</span>
             <Link to="/privacy-policy" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '500' }}>Privacy Policy</Link>

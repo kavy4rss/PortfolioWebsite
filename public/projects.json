@@ -1,8 +1,8 @@
 [
     {
         "title": "Freelancer CRM",
-        "img": "#",
-        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Freelancer-CRM.jpeg?updatedAt=1772694996527",
+        "img": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Freelancer-CRM.jpeg",
+        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Freelancer-CRM.jpeg",
         "summary": "An all-in-one CRM solution designed to empower freelancers by automating tedious administrative tasks. Built with a cutting-edge stack of Next.js and Neon Postgres, it offers seamless client management, project milestone tracking, and dynamic invoicing. Experience a focused workspace that turns complex business management into a simple, high-performance digital experience.",
         "link": "/freelancer-crm",
         "github": "https://github.com/Kavya-Agrawal/freelancer-crm",
@@ -12,8 +12,8 @@
     },
     {
         "title": "FunnelFixPro Agency Website",
-        "img": "#",
-        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Funnel-Fix-Pro.png?updatedAt=1772694996672",
+        "img": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Funnel-Fix-Pro.png",
+        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Funnel-Fix-Pro.png",
         "summary": "A professional agency website designed for FunnelFixPro, focusing on high-conversion funnel optimizations and marketing strategies. This platform showcases case studies, service offerings, and strategic solutions to help businesses scale their digital presence.",
         "link": "/funnelfixpro",
         "github": "https://github.com/Kavya-Agrawal/funnelfixpro",
@@ -22,8 +22,8 @@
     },
     {
         "title": "Vyoamax Event Organiser",
-        "img": "#",
-        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Vyoamax.png?updatedAt=1772694997216",
+        "img": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Vyoamax.png",
+        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Vyoamax.png",
         "summary": "Vyoamax is a dynamic event management platform built with React, designed to simplify the process of discovering and organizing events across various categories like Art, Music, and Business.",
         "link": "/vyoamax",
         "github": "https://github.com/Kavya-Agrawal/vyoamax",
@@ -33,8 +33,8 @@
     },
     {
         "title": "Craft Stock Manager",
-        "img": "#",
-        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Craft-Stock-Manager.png?updatedAt=1772694995907",
+        "img": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Craft-Stock-Manager.png",
+        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/Craft-Stock-Manager.png",
         "summary": "Craft Stock Manager is a specialized inventory management application designed to help artisans and small-scale manufacturers track their materials and finished products efficiently.",
         "link": "/craftstockmanager",
         "github": "https://github.com/Kavya-Agrawal/craft-stock-manager",
@@ -44,7 +44,7 @@
     },
     {
         "title": "Vedic AI Chatbot",
-        "img": "#",
+        "img": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/VedicAI-App.png",
         "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/VedicAI-App.png",
         "link": "/karma-navigator",
         "github": "/",
@@ -53,8 +53,8 @@
     },
     {
         "title": "Safeguard AntiThreat Application",
-        "img": "#",
-        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/SafeGuard-App.png?updatedAt=1772694997309",
+        "img": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/SafeGuard-App.png",
+        "thumbnail": "https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Project-Thumbnail/SafeGuard-App.png",
         "link": "/safeguard",
         "github": "/",
         "type": "Software",

@@ -63,7 +63,6 @@ const ImagePlaceholder = ({ type, title, height = '220px' }) => (
 const ProjectCard = ({ project }) => {
     const { title, type, summary, link, isFeatured } = project;
     const [isVisible, setIsVisible] = useState(false);
-    const [imageLoaded, setImageLoaded] = useState(false);
     const [imageError, setImageError] = useState(false);
     const cardRef = useRef(null);
 
@@ -95,31 +94,22 @@ const ProjectCard = ({ project }) => {
         return () => observer.disconnect();
     }, []);
 
-    // Renders the correct image state: placeholder / skeleton / real img
+    // Renders the correct image state: placeholder / real img
+    // NOTE: opacity is NOT set to 0 — cached images don't fire onLoad in some
+    // browsers, which would leave the image permanently invisible.
     const renderImage = (className, height = '220px') => {
         if (isPlaceholder || imageError) {
             return <ImagePlaceholder type={type} title={title} height={height} />;
         }
         return (
-            <div style={{ position: 'relative', width: '100%' }}>
-                {!imageLoaded && (
-                    <SkeletonLoader height={height} style={{ position: 'absolute', top: 0, left: 0 }} />
-                )}
-                <img
-                    src={optimizedSrc}
-                    alt={`Custom ${type} Solution and App Development by Kavy Agrawal - ${title}`}
-                    className={className}
-                    loading="lazy"
-                    onLoad={() => setImageLoaded(true)}
-                    onError={() => setImageError(true)}
-                    style={{
-                        opacity: imageLoaded ? 1 : 0,
-                        transition: 'opacity 0.4s ease',
-                        position: 'relative', zIndex: 1,
-                        display: 'block', width: '100%'
-                    }}
-                />
-            </div>
+            <img
+                src={optimizedSrc}
+                alt={`Custom ${type} Solution and App Development by Kavy Agrawal - ${title}`}
+                className={className}
+                loading="lazy"
+                onError={() => setImageError(true)}
+                style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
+            />
         );
     };
 
