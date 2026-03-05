@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://kavyagrawal.com/sitemap.xml

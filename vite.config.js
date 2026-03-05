@@ -2,11 +2,19 @@ import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
 import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
 import viteCompression from 'vite-plugin-compression';
+import Sitemap from 'vite-plugin-sitemap';
 
 // https://vite.dev/config/
 export default defineConfig({
   plugins: [
     react(),
+    Sitemap({
+      hostname: 'https://kavyagrawal.com',
+      dynamicRoutes: [
+        '/about', '/projects', '/hobbies', '/contact', '/privacy-policy', '/terms-of-service',
+        '/karma-navigator', '/safeguard', '/freelancer-crm', '/funnelfixpro', '/vyoamax', '/craftstockmanager'
+      ]
+    }),
     ViteImageOptimizer({
       png: { quality: 80 },
       jpeg: { quality: 80 },

@@ -2,6 +2,8 @@ import React, { useState, Suspense, lazy } from 'react'
 import { BrowserRouter, Routes, Route, Link, useLocation } from 'react-router-dom'
 import { PaymentProvider } from './context/PaymentContext'
 import './index.css'
+import { AnimatePresence } from 'framer-motion'
+import PageWrapper from './components/PageWrapper'
 const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
 const Projects = lazy(() => import('./pages/Projects'))
@@ -13,8 +15,9 @@ const FreelancerCRM = lazy(() => import('./pages/FreelancerCRM'))
 const FunnelFixPro = lazy(() => import('./pages/FunnelFixPro'))
 const Vyoamax = lazy(() => import('./pages/Vyoamax'))
 const CraftStockManager = lazy(() => import('./pages/CraftStockManager'))
-const PrivacyPolicy = lazy(() => import('./pages/PrivacyPolicy'))
-const TermsOfService = lazy(() => import('./pages/TermsOfService'))
+const PrivacyPolicy = lazy(() => import('./pages/legal/PrivacyPolicy'))
+const TermsOfService = lazy(() => import('./pages/legal/TermsOfService'))
+const NotFound = lazy(() => import('./pages/NotFound'))
 
 // Simple Footer for Legal Links
 const Footer = () => {
@@ -34,9 +37,11 @@ const Footer = () => {
             <Link to="/privacy-policy" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '500' }}>Privacy Policy</Link>
             <Link to="/terms-of-service" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '500' }}>Terms of Service</Link>
             <Link to="/contact" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '500' }}>Contact Us</Link>
+            <a href="https://github.com/kavy4rss" target="_blank" rel="noopener noreferrer" style={{ color: 'var(--text-primary)', textDecoration: 'none', fontWeight: '500' }}>GitHub</a>
         </footer>
     );
 };
+
 // Navigation Component to handle active states
 const Navigation = () => {
     const location = useLocation();
@@ -95,6 +100,31 @@ const Navigation = () => {
     );
 };
 
+const AnimatedRoutes = () => {
+    const location = useLocation();
+
+    return (
+        <AnimatePresence mode="wait">
+            <Routes location={location} key={location.pathname}>
+                <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
+                <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
+                <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
+                <Route path="/hobbies" element={<PageWrapper><Hobbies /></PageWrapper>} />
+                <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
+                <Route path="/karma-navigator" element={<PageWrapper><KarmaNavigator /></PageWrapper>} />
+                <Route path="/safeguard" element={<PageWrapper><Safeguard /></PageWrapper>} />
+                <Route path="/freelancer-crm" element={<PageWrapper><FreelancerCRM /></PageWrapper>} />
+                <Route path="/funnelfixpro" element={<PageWrapper><FunnelFixPro /></PageWrapper>} />
+                <Route path="/vyoamax" element={<PageWrapper><Vyoamax /></PageWrapper>} />
+                <Route path="/craftstockmanager" element={<PageWrapper><CraftStockManager /></PageWrapper>} />
+                <Route path="/privacy-policy" element={<PageWrapper><PrivacyPolicy /></PageWrapper>} />
+                <Route path="/terms-of-service" element={<PageWrapper><TermsOfService /></PageWrapper>} />
+                <Route path="*" element={<PageWrapper><NotFound /></PageWrapper>} />
+            </Routes>
+        </AnimatePresence>
+    );
+};
+
 function App() {
     return (
         <PaymentProvider>
@@ -102,21 +132,7 @@ function App() {
                 <div className="app-wrapper">
                     <Navigation />
                     <Suspense fallback={<div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh', width: '100vw', background: '#0a0a0a', color: '#fff' }}><h2>Loading...</h2></div>}>
-                        <Routes>
-                            <Route path="/" element={<Home />} />
-                            <Route path="/about" element={<About />} />
-                            <Route path="/projects" element={<Projects />} />
-                            <Route path="/hobbies" element={<Hobbies />} />
-                            <Route path="/contact" element={<Contact />} />
-                            <Route path="/karma-navigator" element={<KarmaNavigator />} />
-                            <Route path="/safeguard" element={<Safeguard />} />
-                            <Route path="/freelancer-crm" element={<FreelancerCRM />} />
-                            <Route path="/funnelfixpro" element={<FunnelFixPro />} />
-                            <Route path="/vyoamax" element={<Vyoamax />} />
-                            <Route path="/craftstockmanager" element={<CraftStockManager />} />
-                            <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-                            <Route path="/terms-of-service" element={<TermsOfService />} />
-                        </Routes>
+                        <AnimatedRoutes />
                     </Suspense>
                     <Footer />
                 </div>

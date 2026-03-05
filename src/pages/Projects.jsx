@@ -30,7 +30,7 @@ const ProjectCard = ({ project }) => {
 
     if (isFeatured) {
         return (
-            <article ref={cardRef} className="featured-project-card">
+            <motion.article whileHover={{ scale: 1.05, transition: { duration: 0.2 } }} ref={cardRef} className="featured-project-card">
                 {isVisible ? (
                     <>
                         <Link to={link} target="_blank" className="featured-img-link" style={{ position: 'relative' }}>
@@ -40,7 +40,7 @@ const ProjectCard = ({ project }) => {
                             )}
                             <img
                                 src={img}
-                                alt={title}
+                                alt={`Full Stack Developer Portfolio Project - ${title}`}
                                 className="featured-img"
                                 loading="lazy"
                                 onLoad={() => setImageLoaded(true)}
@@ -61,12 +61,12 @@ const ProjectCard = ({ project }) => {
                 ) : (
                     <div style={{ height: '400px', width: '100%', background: 'rgba(255,255,255,0.05)', borderRadius: '12px' }}></div>
                 )}
-            </article>
+            </motion.article>
         );
     }
 
     return (
-        <article ref={cardRef} className="project-card">
+        <motion.article whileHover={{ scale: 1.05, transition: { duration: 0.2 } }} ref={cardRef} className="project-card">
             {isVisible ? (
                 <>
                     <Link to={link} target="_blank" className="project-img-link" style={{ position: 'relative' }}>
@@ -76,7 +76,7 @@ const ProjectCard = ({ project }) => {
                         )}
                         <img
                             src={img}
-                            alt={title}
+                            alt={`Full Stack Developer Portfolio Project - ${title}`}
                             className="project-img"
                             loading="lazy"
                             onLoad={() => setImageLoaded(true)}
@@ -96,7 +96,7 @@ const ProjectCard = ({ project }) => {
             ) : (
                 <div style={{ height: '300px', width: '100%', background: 'rgba(255,255,255,0.05)', borderRadius: '12px' }}></div>
             )}
-        </article>
+        </motion.article>
     );
 };
 
@@ -162,13 +162,32 @@ function Projects() {
                     <p>Loading projects...</p>
                 </div>
             ) : (
-                <div className="projects-grid">
+                <motion.div
+                    className="projects-grid"
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: true, margin: "100px" }}
+                    variants={{
+                        hidden: { opacity: 0 },
+                        visible: {
+                            opacity: 1,
+                            transition: { staggerChildren: 0.1 }
+                        }
+                    }}
+                >
                     {filteredProjects.map((project, index) => (
-                        <div key={index} className={project.isFeatured ? "col-span-12" : "col-span-6"}>
+                        <motion.div
+                            key={index}
+                            className={project.isFeatured ? "col-span-12" : "col-span-6"}
+                            variants={{
+                                hidden: { opacity: 0, y: 30 },
+                                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
+                            }}
+                        >
                             <ProjectCard project={project} />
-                        </div>
+                        </motion.div>
                     ))}
-                </div>
+                </motion.div>
             )}
 
             {!isLoading && filteredProjects.length === 0 && (

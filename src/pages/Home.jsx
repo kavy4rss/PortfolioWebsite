@@ -17,10 +17,10 @@ function Home() {
                     />
                 </div>
                 <div className="hero-content">
-                    <h1>Turning Vision Into Reality With Code And Design.</h1>
+                    <h1>Website Developer & App Developer | Turning Vision Into Reality.</h1>
                     <p>
-                        As a skilled full-stack developer, I am dedicated to turning ideas into innovative web applications.
-                        Explore my latest projects and articles, showcasing my expertise in React.js and web development.
+                        As a skilled Full Stack Developer and SaaS Developer, I am dedicated to turning ideas into innovative, high-performance web applications.
+                        Explore my latest projects and articles, showcasing my expertise in modern web and mobile development.
                     </p>
                     <div className="cta-group">
                         <a href={ResumePDF} download="Resume.pdf" className="btn-primary">
