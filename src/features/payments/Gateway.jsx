@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { motion, useReducedMotion } from 'framer-motion';
 // QR Code image: update this URL with your ImageKit link
-const QRCodeImg = '#';
+const QRCodeImg = 'https://ik.imagekit.io/kxnj6nzco/kavyagrawal.netlify.app/Payment-Gateway/QR-Code.jpg?updatedAt=1772694936867';
 import './gateway.css';
 
 const Gateway = ({ projectData, paymentIntent, onBack }) => {
