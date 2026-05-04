@@ -1,6 +1,7 @@
 import React from 'react'
 import { motion } from 'framer-motion'
 import clientsData from '../data/clientsData'
+import collegeLogo from '../assets/bgremoved.png'
 import '../index.css'
 
 // ── Empty State SVG ────────────────────────────────────────────────────────────
@@ -24,7 +25,7 @@ const ClientCard = ({ client, index }) => {
             <div className="cc-top-row">
                 <div className="cc-logo-circle" aria-hidden="true">
                     <img
-                        src={logo}
+                        src={collegeLogo}
                         alt={`${name} logo`}
                         className="cc-logo-img"
                         onError={e => {
