@@ -382,7 +382,7 @@ const Hobbies = () => {
                 style={{ textAlign: 'center', marginBottom: '6rem' }}
             >
                 <div className="kn-title-wrapper" style={{ justifyContent: 'center' }}>
-                    <h1 className="kn-title" style={{ fontSize: 'clamp(3rem, 5vw, 5rem)', color: '#000000' }}>My Hobbies & Interests</h1>
+                    <h1 className="kn-title" style={{ fontSize: 'clamp(3rem, 5vw, 5rem)', color: '#000000', WebkitTextFillColor: '#000000', background: 'none', filter: 'none' }}>My Hobbies &amp; Interests</h1>
                 </div>
                 <p className="kn-subtitle" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.2rem', color: '#4a4a4a' }}>
                     When I'm not bringing visions to life through code, here is where my passions and creativity converge.

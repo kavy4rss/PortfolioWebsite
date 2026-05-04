@@ -75,7 +75,7 @@ const Contact = () => {
                 style={{ textAlign: 'center', marginBottom: '4rem' }}
             >
                 <div className="kn-title-wrapper" style={{ justifyContent: 'center' }}>
-                    <h1 className="kn-title" style={{ fontSize: 'clamp(3rem, 5vw, 5rem)', color: '#000000' }}>Let's Connect</h1>
+                    <h1 className="kn-title" style={{ fontSize: 'clamp(3rem, 5vw, 5rem)', color: '#000000', WebkitTextFillColor: '#000000', background: 'none', filter: 'none' }}>Let's Connect</h1>
                 </div>
                 <p className="kn-subtitle" style={{ maxWidth: '600px', margin: '0 auto', fontSize: '1.2rem', color: '#4a4a4a' }}>
                     Have a project in mind, a question about my work, or just want to say hi? I'm currently open to new opportunities.

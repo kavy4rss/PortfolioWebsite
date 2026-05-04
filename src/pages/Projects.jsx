@@ -150,6 +150,9 @@ const ProjectCard = ({ project }) => {
 function Projects() {
     const [filter, setFilter] = useState('All');
     const [searchQuery, setSearchQuery] = useState('');
+    // projectData is the single source of truth — set once from fetch, never mutated.
+    // Using state (not a ref) ensures every searchQuery/filter change triggers a re-render
+    // and filteredProjects is always re-derived from the full original dataset.
     const [projectData, setProjectData] = useState([]);
     const [isLoading, setIsLoading] = useState(true);
 
@@ -164,6 +167,7 @@ function Projects() {
                 return res.json();
             })
             .then(data => {
+                // projectData is set exactly once and never mutated — acts as ALL_PROJECTS
                 setProjectData(data);
                 setIsLoading(false);
             })
@@ -175,11 +179,17 @@ function Projects() {
 
     const categories = ['All', 'Website', 'App', 'SaaS', 'Micro SaaS', 'Software', 'Chrome Extension'];
 
+    // Always filter from projectData (the full original list) — NEVER from a derived subset.
+    // Empty query → show everything; backspace to "" → full list instantly restored.
+    const q = searchQuery.toLowerCase().trim();
     const filteredProjects = projectData.filter(proj => {
-        const matchesFilter = filter === 'All' || proj.type === filter;
-        const matchesSearch = proj.title.toLowerCase().includes(searchQuery.toLowerCase()) ||
-            (proj.summary && proj.summary.toLowerCase().includes(searchQuery.toLowerCase()));
-        return matchesFilter && matchesSearch;
+        const matchesCategory = filter === 'All' || proj.type === filter;
+        if (!q) return matchesCategory; // empty string: honour category, show all
+        const matchesSearch =
+            proj.title.toLowerCase().includes(q) ||
+            (proj.type && proj.type.toLowerCase().includes(q)) ||
+            (proj.summary && proj.summary.toLowerCase().includes(q));
+        return matchesCategory && matchesSearch;
     });
 
     return (

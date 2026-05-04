@@ -7,6 +7,7 @@ import PageWrapper from './components/PageWrapper'
 const Home = lazy(() => import('./pages/Home'))
 const About = lazy(() => import('./pages/About'))
 const Projects = lazy(() => import('./pages/Projects'))
+const Clients = lazy(() => import('./pages/Clients'))
 const Hobbies = lazy(() => import('./pages/Hobbies'))
 const Contact = lazy(() => import('./pages/Contact'))
 const KarmaNavigator = lazy(() => import('./pages/VedicAI'))
@@ -62,6 +63,7 @@ const Navigation = () => {
                 <Link to="/" className={location.pathname === '/' ? 'active' : ''}>Home</Link>
                 <Link to="/about" className={location.pathname === '/about' ? 'active' : ''}>About</Link>
                 <Link to="/projects" className={location.pathname === '/projects' ? 'active' : ''}>Projects</Link>
+                <Link to="/clients" className={location.pathname === '/clients' ? 'active' : ''}>Clients</Link>
                 <Link to="/hobbies" className={location.pathname === '/hobbies' ? 'active' : ''}>Hobbies</Link>
                 <Link to="/contact" className={location.pathname === '/contact' ? 'active' : ''}>Contact</Link>
             </nav>
@@ -113,6 +115,7 @@ const AnimatedRoutes = () => {
                 <Route path="/" element={<PageWrapper><Home /></PageWrapper>} />
                 <Route path="/about" element={<PageWrapper><About /></PageWrapper>} />
                 <Route path="/projects" element={<PageWrapper><Projects /></PageWrapper>} />
+                <Route path="/clients" element={<PageWrapper><Clients /></PageWrapper>} />
                 <Route path="/hobbies" element={<PageWrapper><Hobbies /></PageWrapper>} />
                 <Route path="/contact" element={<PageWrapper><Contact /></PageWrapper>} />
                 <Route path="/karma-navigator" element={<PageWrapper><KarmaNavigator /></PageWrapper>} />
