@@ -17,10 +17,10 @@ import gtaLogo from '../media/Gaming/GTA5.webp';
 import freefireLogo from '../media/Gaming/901b4ed4eaba1ae9db94fe3c3713b2ef.jpg';
 
 // Import Graphic Design images
-import gd1 from '../media/GraphicDesign/1.png';
-import gd2 from '../media/GraphicDesign/2.png';
-import gd3 from '../media/GraphicDesign/3.png';
-import gd4 from '../media/GraphicDesign/4.png';
+import gd1 from '../media/GraphicDesign/1.jpg';
+import gd2 from '../media/GraphicDesign/2.jpg';
+import gd3 from '../media/GraphicDesign/3.jpg';
+import gd4 from '../media/GraphicDesign/4.jpg';
 import gd5 from '../media/GraphicDesign/5.jpg';
 
 // Import all 31 Photography images dynamically using Vite glob

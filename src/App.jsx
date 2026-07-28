@@ -17,8 +17,12 @@ import TermsOfService from './pages/TermsOfService';
 import Sitemap from './pages/Sitemap';
 import NotFound from './pages/NotFound';
 
+import { useEffect } from 'react';
 import { useLenis } from './hooks/useLenis';
 import BackgroundGrid from './components/ui/BackgroundGrid';
+import { preloadImages } from './utils/imagePreloader';
+import profilePhoto from './media/Kavy/IMG_9062.JPG';
+import sgmicLogo from './media/Client/Sgmic.jpg';
 
 function AppRoutes() {
   const location = useLocation();
@@ -115,6 +119,11 @@ function AppRoutes() {
 
 export default function App() {
   useLenis(); // Initialize smooth scroll
+
+  useEffect(() => {
+    // Preload key images in the background during idle time
+    preloadImages([profilePhoto, sgmicLogo]);
+  }, []);
 
   return (
     <HelmetProvider>

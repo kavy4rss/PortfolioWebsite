@@ -1,27 +1,31 @@
 [build]
-  command = "npm run build"
   publish = "dist"
+  command = "npm run build"
 
+# SPA redirect rule
 [[redirects]]
   from = "/*"
   to = "/index.html"
   status = 200
 
-[[headers]]
-  for = "/*"
-  [headers.values]
-    Content-Security-Policy = "default-src 'self' 'unsafe-inline' 'unsafe-eval' https://fonts.googleapis.com https://fonts.gstatic.com https://pagead2.googlesyndication.com; img-src 'self' data: https://ik.imagekit.io https:; media-src 'self' https:; connect-src 'self' https://ik.imagekit.io /.netlify/functions/process-payment;"
-    X-Frame-Options = "DENY"
-    X-XSS-Protection = "1; mode=block"
-    X-Content-Type-Options = "nosniff"
-    Referrer-Policy = "strict-origin-when-cross-origin"
-
+# Aggressive Immutable Caching for Static Assets (Images, Fonts, JS, CSS)
 [[headers]]
   for = "/assets/*"
   [headers.values]
     Cache-Control = "public, max-age=31536000, immutable"
+    X-Content-Type-Options = "nosniff"
 
 [[headers]]
-  for = "/projects.json"
+  for = "/*.jpg"
   [headers.values]
-    Cache-Control = "public, max-age=86400, stale-while-revalidate=86400"
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.png"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"
+
+[[headers]]
+  for = "/*.webp"
+  [headers.values]
+    Cache-Control = "public, max-age=31536000, immutable"

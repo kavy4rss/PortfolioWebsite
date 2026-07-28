@@ -10,6 +10,7 @@ export default function Home() {
     <>
       <Helmet>
         <title>Kavya Agrawal | Website, App &amp; SaaS Developer</title>
+        <meta name="google-site-verification" content="FYsbbXqCGyLL0qdGrWz4AXRPJyyjihLslViPdvqI9Ms" />
         <meta name="description" content="Kavya Agrawal's Professional Portfolio. Turning Vision Into Reality as a Full Stack Developer, SaaS Developer, and App Developer with modern architectures." />
         <link rel="canonical" href="https://kavyagrawal.dev/" />
         <meta property="og:title" content="Kavya Agrawal | Website, App &amp; SaaS Developer" />
