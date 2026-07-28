@@ -1,3 +1,21 @@
 User-agent: *
 Allow: /
-Sitemap: https://kavyagrawal.com/sitemap.xml
+
+# Allow AI crawlers explicitly
+User-agent: GPTBot
+Allow: /
+
+User-agent: ClaudeBot
+Allow: /
+
+User-agent: Google-Extended
+Allow: /
+
+User-agent: PerplexityBot
+Allow: /
+
+User-agent: Applebot-Extended
+Allow: /
+
+# Sitemap
+Sitemap: https://kavyagrawal.dev/sitemap.xml

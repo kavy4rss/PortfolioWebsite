@@ -1,0 +1,42 @@
+# Kavy Agrawal — Personal Portfolio
+
+## Who is Kavy Agrawal?
+
+Kavy Agrawal is a full-stack developer and SaaS architect based in India, specializing in building premium web applications, cross-platform mobile apps, and scalable SaaS platforms.
+
+## Skills & Expertise
+
+- **Frontend**: React, Next.js, TypeScript, Tailwind CSS, Framer Motion
+- **Backend**: Node.js, Python, FastAPI, Express.js, GraphQL
+- **Mobile**: Flutter, Dart
+- **Databases**: PostgreSQL, MongoDB, Redis, Firebase
+- **Cloud/DevOps**: AWS, Docker, Netlify
+- **Payments**: Stripe, Razorpay, PayU — custom gateway integration
+- **AI**: OpenAI API integration, LangChain
+
+## Tagline
+
+"Turning Vision Into Reality"
+
+## Services
+
+Kavy Agrawal is available for:
+- Full-stack web application development
+- SaaS platform architecture and development
+- Flutter mobile app development
+- Custom payment gateway integration
+- AI integration (OpenAI/LangChain)
+- Technical consultation
+
+## Contact
+
+Portfolio: https://kavyagrawal.dev
+Contact form: https://kavyagrawal.dev/contact
+
+## Key Pages
+
+- Home: https://kavyagrawal.dev/
+- About: https://kavyagrawal.dev/about
+- Projects: https://kavyagrawal.dev/projects
+- Contact: https://kavyagrawal.dev/contact
+- Sitemap: https://kavyagrawal.dev/sitemap

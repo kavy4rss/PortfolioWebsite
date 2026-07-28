@@ -1,53 +1,22 @@
 import { defineConfig } from 'vite'
 import react from '@vitejs/plugin-react'
-import { ViteImageOptimizer } from 'vite-plugin-image-optimizer';
-import viteCompression from 'vite-plugin-compression';
-import Sitemap from 'vite-plugin-sitemap';
 
-// https://vite.dev/config/
 export default defineConfig({
-  publicDir: 'public',
-  plugins: [
-    react(),
-    Sitemap({
-      hostname: 'https://kavyagrawal.com',
-      dynamicRoutes: [
-        '/about', '/projects', '/hobbies', '/contact', '/privacy-policy', '/terms-of-service',
-        '/karma-navigator', '/safeguard', '/freelancer-crm', '/funnelfixpro', '/vyoamax', '/craftstockmanager'
-      ]
-    }),
-    ViteImageOptimizer({
-      png: { quality: 80 },
-      jpeg: { quality: 80 },
-      jpg: { quality: 80 },
-      webp: { lossless: true },
-      avif: { lossless: true },
-    }),
-    viteCompression({
-      algorithm: 'brotliCompress',
-      ext: '.br',
-    }),
-    viteCompression({
-      algorithm: 'gzip',
-      ext: '.gz',
-    }),
-  ],
+  plugins: [react()],
+  assetsInclude: ['**/*.JPG', '**/*.JPEG', '**/*.PNG', '**/*.WEBP'],
   build: {
-    target: 'esnext', // Removes legacy polyfills
+    chunkSizeWarningLimit: 800,
     rollupOptions: {
       output: {
-        manualChunks(id) {
-          if (id.includes('node_modules/framer-motion')) {
-            return 'framer-motion';
-          }
-          if (id.includes('node_modules/swiper')) {
-            return 'swiper';
-          }
-          if (id.includes('node_modules/three') || id.includes('node_modules/@react-three')) {
-            return 'three';
-          }
-        }
-      }
-    }
-  }
+        manualChunks: {
+          // Split heavy 3D library into its own chunk
+          'three-vendor': ['three', '@react-three/fiber', '@react-three/drei'],
+          // Split animation libraries
+          'motion-vendor': ['framer-motion', 'gsap'],
+          // Split React + router
+          'react-vendor': ['react', 'react-dom', 'react-router-dom', 'react-helmet-async'],
+        },
+      },
+    },
+  },
 })

@@ -1,265 +1,162 @@
-import React, { useState, useEffect, useRef } from 'react'
-import { motion } from 'framer-motion' // eslint-disable-line no-unused-vars
-import { Link } from 'react-router-dom'
-import '../index.css'
+import { useState } from 'react';
+import { Helmet } from 'react-helmet-async';
+import { motion, AnimatePresence } from 'framer-motion';
+import { Link } from 'react-router-dom';
+import { ExternalLink, Github, ArrowRight } from 'lucide-react';
+import { projects, projectCategories } from '../data/projects';
+import Card from '../components/ui/Card';
+import Tag from '../components/ui/Tag';
 
-// resolveImageSrc removed because it is no longer used
-
-// Shimmer skeleton loader
-const SkeletonLoader = ({ height = '220px', style = {} }) => (
-    <div style={{
-        width: '100%', height,
-        borderRadius: '12px',
-        background: 'linear-gradient(90deg,rgba(128,128,128,0.08) 25%,rgba(128,128,128,0.15) 50%,rgba(128,128,128,0.08) 75%)',
-        backgroundSize: '200% 100%',
-        animation: 'imagekit-shimmer 1.6s infinite linear',
-        ...style
-    }} />
-);
-
-// Fallback when no URL is available or onError fires
-const ImagePlaceholder = ({ height = '220px' }) => (
-    <div style={{
-        width: '100%', height,
-        borderRadius: '12px',
-        background: 'var(--bg-color, #f5f5f5)',
-        border: '1px dashed rgba(128,128,128,0.3)',
-        display: 'flex', flexDirection: 'column',
-        alignItems: 'center', justifyContent: 'center',
-        gap: '0.6rem', color: 'rgba(128,128,128,0.6)',
-        fontSize: '0.85rem', fontWeight: 500
-    }}>
-        <svg width="36" height="36" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="1.5">
-            <rect x="3" y="3" width="18" height="18" rx="2" />
-            <circle cx="8.5" cy="8.5" r="1.5" />
-            <polyline points="21 15 16 10 5 21" />
-        </svg>
-        Project Preview
-    </div>
-);
-
-// Lazy loaded project card component with Intersection Observer
-const ProjectCard = ({ project }) => {
-    const { title, type, summary, link, isFeatured } = project;
-    const [isVisible, setIsVisible] = useState(false);
-    const [imageError, setImageError] = useState(false);
-    const cardRef = useRef(null);
-
-    // Explicit Image Protocol Guard
-    const imageUrl = project.thumbnail?.startsWith('http') ? project.thumbnail : null;
-
-    // Dev-mode debug: log the exact URL being used for this card
-    if (import.meta.env.DEV) {
-        console.log(`[ProjectCard] "${title}" → resolved: "${imageUrl}"`);
-    }
-
-    useEffect(() => {
-        const observer = new IntersectionObserver(
-            ([entry]) => {
-                if (entry.isIntersecting) {
-                    setIsVisible(true);
-                    observer.disconnect();
-                }
-            },
-            { threshold: 0.1, rootMargin: '50px' }
-        );
-
-        if (cardRef.current) {
-            observer.observe(cardRef.current);
-        }
-
-        return () => observer.disconnect();
-    }, []);
-
-    // Simplified rendering strictly enforcing HTTP protocol
-    const renderImage = (className, height = '220px') => {
-        if (!imageUrl || imageError) {
-            return <SkeletonLoader height={height} />;
-        }
-        return (
-            <img
-                src={imageUrl}
-                alt={`Custom ${type} Solution and App Development by Kavy Agrawal - ${title}`}
-                className={className}
-                loading="lazy"
-                crossOrigin="anonymous"
-                onError={() => setImageError(true)}
-                style={{ display: 'block', width: '100%', height: '100%', objectFit: 'cover' }}
-            />
-        );
-    };
-
-    if (isFeatured) {
-        return (
-            <motion.article
-                whileHover={!imageUrl ? {} : { scale: 1.01, transition: { duration: 0.2 } }}
-                ref={cardRef} className="featured-project-card"
-            >
-                {isVisible ? (
-                    <>
-                        <Link to={link} target={link.startsWith('/') ? '_self' : '_blank'} className="featured-img-link">
-                            <div className="img-overlay" style={{ zIndex: 2 }}></div>
-                            {renderImage('featured-img', '100%')}
-                        </Link>
-                        <div className="featured-content">
-                            <span className="project-type">{type}</span>
-                            <Link to={link} target={link.startsWith('/') ? '_self' : '_blank'} className="hover:underline underline-offset-2">
-                                <h2 className="project-title">{title}</h2>
-                            </Link>
-                            <p className="project-summary">{summary}</p>
-                            <div className="project-buttons">
-                                <Link to={link} target={link.startsWith('/') ? '_self' : '_blank'} className="visit-btn">Visit Project</Link>
-                            </div>
-                        </div>
-                    </>
-                ) : (
-                    <SkeletonLoader height="400px" />
-                )}
-            </motion.article>
-        );
-    }
-
-    return (
-        <motion.article
-            whileHover={!imageUrl ? {} : { scale: 1.05, transition: { duration: 0.2 } }}
-            ref={cardRef} className="project-card"
-        >
-            {isVisible ? (
-                <>
-                    <Link to={link} target={link.startsWith('/') ? '_self' : '_blank'} className="project-img-link">
-                        <div className="img-overlay" style={{ zIndex: 2 }}></div>
-                        {renderImage('project-img', '200px')}
-                    </Link>
-                    <div className="project-content">
-                        <span className="project-type">{type}</span>
-                        <Link to={link} target={link.startsWith('/') ? '_self' : '_blank'} className="hover:underline underline-offset-2">
-                            <h2 className="small-project-title">{title}</h2>
-                        </Link>
-                        <div className="project-buttons-small">
-                            <Link to={link} target={link.startsWith('/') ? '_self' : '_blank'} className="text-link">Visit</Link>
-                        </div>
-                    </div>
-                </>
-            ) : (
-                <SkeletonLoader height="300px" />
-            )}
-        </motion.article>
-    );
+const tagColors = {
+  'Web': '#FFFFFF',
+  'App': '#F5C518',
+  'SaaS': '#F59E0B',
+  'AI': '#FDE047',
 };
 
-function Projects() {
-    const [filter, setFilter] = useState('All');
-    const [searchQuery, setSearchQuery] = useState('');
-    // projectData is the single source of truth — set once from fetch, never mutated.
-    // Using state (not a ref) ensures every searchQuery/filter change triggers a re-render
-    // and filteredProjects is always re-derived from the full original dataset.
-    const [projectData, setProjectData] = useState([]);
-    const [isLoading, setIsLoading] = useState(true);
+function ProjectCard({ project }) {
+  return (
+    <motion.div
+      layout
+      initial={{ opacity: 0, y: 24 }}
+      animate={{ opacity: 1, y: 0 }}
+      exit={{ opacity: 0, scale: 0.95 }}
+      transition={{ duration: 0.4 }}
+    >
+      <Card tilt className="p-6 h-full flex flex-col gap-5 group">
+        {/* Color accent top */}
+        <div className="h-1 rounded-full" style={{ background: `linear-gradient(90deg, ${project.color}, transparent)` }} />
 
-    useEffect(() => {
-        // Robust fetch with cache busting
-        const timestamp = new Date().getTime();
-        const jsonUrl = `${window.location.origin}/projects.json?v=${timestamp}`;
-
-        fetch(jsonUrl)
-            .then(res => {
-                if (!res.ok) throw new Error(`HTTP error! status: ${res.status}`);
-                return res.json();
-            })
-            .then(data => {
-                // projectData is set exactly once and never mutated — acts as ALL_PROJECTS
-                setProjectData(data);
-                setIsLoading(false);
-            })
-            .catch(err => {
-                console.error("[Data-to-UI Pipeline] Failed to load projects:", err.message, err);
-                setIsLoading(false);
-            });
-    }, []);
-
-    const categories = ['All', 'Website', 'App', 'SaaS', 'Micro SaaS', 'Software', 'Chrome Extension'];
-
-    // Always filter from projectData (the full original list) — NEVER from a derived subset.
-    // Empty query → show everything; backspace to "" → full list instantly restored.
-    const q = searchQuery.toLowerCase().trim();
-    const filteredProjects = projectData.filter(proj => {
-        const matchesCategory = filter === 'All' || proj.type === filter;
-        if (!q) return matchesCategory; // empty string: honour category, show all
-        const matchesSearch =
-            proj.title.toLowerCase().includes(q) ||
-            (proj.type && proj.type.toLowerCase().includes(q)) ||
-            (proj.summary && proj.summary.toLowerCase().includes(q));
-        return matchesCategory && matchesSearch;
-    });
-
-    return (
-        <div className="projects-page">
-            <h2 className="section-title">Imagination Trumps Knowledge!</h2>
-
-            <div className="search-filter-container">
-                <div className="search-bar" style={{ display: 'flex', gap: '10px', alignItems: 'center', width: '100%', maxWidth: '600px', margin: '0 auto', background: 'rgba(255,255,255,0.05)', padding: '10px 20px', borderRadius: '50px', border: '1px solid rgba(255,255,255,0.1)' }}>
-                    <svg className="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" style={{ flexShrink: 0, opacity: 0.6 }}><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-                    <input
-                        type="text"
-                        placeholder="Search projects by name..."
-                        value={searchQuery}
-                        onChange={(e) => setSearchQuery(e.target.value)}
-                        style={{ flexGrow: 1, background: 'transparent', border: 'none', outline: 'none', color: 'inherit', fontSize: '1rem', padding: '5px' }}
-                    />
-                    <div style={{ width: '1px', height: '24px', background: 'rgba(255,255,255,0.2)', margin: '0 10px' }}></div>
-                    <select
-                        value={filter}
-                        onChange={(e) => setFilter(e.target.value)}
-                        className="filter-select"
-                        style={{ background: 'transparent', border: 'none', outline: 'none', color: 'inherit', cursor: 'pointer', fontWeight: 500 }}
-                    >
-                        {categories.map(cat => (
-                            <option key={cat} value={cat} style={{ color: '#000' }}>{cat}</option>
-                        ))}
-                    </select>
-                </div>
-            </div>
-
-            {isLoading ? (
-                <div className="min-h-[50vh] flex items-center justify-center">
-                    <p>Loading projects...</p>
-                </div>
-            ) : (
-                <motion.div
-                    className="projects-grid"
-                    initial="hidden"
-                    whileInView="visible"
-                    viewport={{ once: true, margin: "100px" }}
-                    variants={{
-                        hidden: { opacity: 0 },
-                        visible: {
-                            opacity: 1,
-                            transition: { staggerChildren: 0.1 }
-                        }
-                    }}
-                >
-                    {filteredProjects.map((project, index) => (
-                        <motion.div
-                            key={index}
-                            className={project.isFeatured ? "col-span-12" : "col-span-6"}
-                            variants={{
-                                hidden: { opacity: 0, y: 30 },
-                                visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: "easeOut" } }
-                            }}
-                        >
-                            <ProjectCard project={project} />
-                        </motion.div>
-                    ))}
-                </motion.div>
-            )}
-
-            {!isLoading && filteredProjects.length === 0 && (
-                <div className="no-projects">
-                    <h3>No projects found in this category.</h3>
-                </div>
-            )}
+        {/* Category + tags + Coming Soon */}
+        <div className="flex flex-wrap items-center justify-between gap-2">
+          <div className="flex flex-wrap gap-2">
+            {project.tags.map((t) => (
+              <Tag key={t} color={tagColors[t] || '#F5C518'}>{t}</Tag>
+            ))}
+          </div>
+          {project.comingSoon && (
+            <span className="text-[10px] font-mono font-bold uppercase tracking-wider px-2.5 py-0.5 rounded-full" style={{ background: 'rgba(245, 158, 11, 0.15)', color: '#F59E0B', border: '1px solid rgba(245, 158, 11, 0.3)' }}>
+              Coming Soon
+            </span>
+          )}
         </div>
-    )
+
+        {/* Title & tagline */}
+        <div className="flex flex-col gap-1 flex-1">
+          <h2 className="font-display font-bold text-lg text-white">{project.title}</h2>
+          <p className="text-sm leading-relaxed" style={{ color: '#A0A0AA' }}>{project.tagline}</p>
+        </div>
+
+        {/* Problem solved */}
+        <p className="text-xs leading-relaxed italic" style={{ color: '#6B6B7A' }}>
+          &ldquo;{project.problem}&rdquo;
+        </p>
+
+        {/* Tech */}
+        <div className="flex flex-wrap gap-1.5">
+          {project.tech.slice(0, 5).map((t) => (
+            <span key={t} className="text-xs px-2.5 py-1 rounded-lg" style={{ background: 'rgba(255,255,255,0.04)', color: '#6B6B7A', border: '1px solid rgba(255,255,255,0.05)' }}>{t}</span>
+          ))}
+          {project.tech.length > 5 && <span className="text-xs px-2.5 py-1 rounded-lg" style={{ background: 'rgba(255,255,255,0.04)', color: '#6B6B7A', border: '1px solid rgba(255,255,255,0.05)' }}>+{project.tech.length - 5}</span>}
+        </div>
+
+        {/* Actions */}
+        <div className="flex items-center gap-3 pt-3 border-t" style={{ borderColor: 'rgba(255,255,255,0.05)' }}>
+          <Link
+            to={`/projects/${project.slug}`}
+            className="flex items-center gap-1.5 text-xs font-semibold transition-colors hover:text-white"
+            style={{ color: project.color }}
+          >
+            View Details <ArrowRight size={12} />
+          </Link>
+          <div className="flex gap-2 ml-auto">
+            {project.githubUrl !== '#' && (
+              <a href={project.githubUrl} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-lg hover:bg-white/5 transition-colors" aria-label="GitHub repository">
+                <Github size={14} style={{ color: '#6B6B7A' }} />
+              </a>
+            )}
+            {project.liveUrl !== '#' && (
+              <a href={project.liveUrl} target="_blank" rel="noopener noreferrer" className="p-1.5 rounded-lg hover:bg-white/5 transition-colors" aria-label="Live site">
+                <ExternalLink size={14} style={{ color: '#6B6B7A' }} />
+              </a>
+            )}
+          </div>
+        </div>
+      </Card>
+    </motion.div>
+  );
 }
 
-export default Projects
+export default function Projects() {
+  const [activeFilter, setActiveFilter] = useState('All');
+
+  const filtered = activeFilter === 'All'
+    ? projects
+    : projects.filter((p) => p.tags.includes(activeFilter));
+
+  return (
+    <>
+      <Helmet>
+        <title>Projects — Kavy Agrawal | Full Stack Developer</title>
+        <meta name="description" content="Browse Kavy Agrawal's portfolio projects — SaaS platforms, Flutter apps, web applications, and AI-integrated products." />
+        <link rel="canonical" href="https://kavyagrawal.dev/projects" />
+      </Helmet>
+
+      <main id="main-content" className="pt-28 pb-20">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+          {/* Header */}
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="mb-12"
+          >
+            <p className="text-xs font-semibold tracking-[0.2em] uppercase mb-3" style={{ color: '#F5C518' }}>Portfolio</p>
+            <h1 className="font-display font-bold mb-4" style={{ fontSize: 'clamp(2rem, 4vw, 3rem)' }}>
+              My <span className="gradient-text">Projects</span>
+            </h1>
+            <p className="text-sm max-w-lg" style={{ color: '#A0A0AA' }}>
+              A curated collection of projects spanning full-stack web, mobile apps, SaaS platforms, and AI integrations.
+            </p>
+          </motion.div>
+
+          {/* Filter buttons */}
+          <div className="flex flex-wrap gap-2 mb-10">
+            {projectCategories.map((cat) => (
+              <button
+                key={cat}
+                id={`filter-${cat.toLowerCase()}`}
+                onClick={() => setActiveFilter(cat)}
+                className="px-5 py-2.5 rounded-pill text-sm font-medium transition-all duration-200"
+                style={{
+                  background: activeFilter === cat
+                    ? 'linear-gradient(135deg, #F5C518, #FFE57F)'
+                    : 'rgba(255,255,255,0.04)',
+                  color: activeFilter === cat ? '#000' : '#A0A0AA',
+                  border: activeFilter === cat ? 'none' : '1px solid rgba(255,255,255,0.06)',
+                }}
+              >
+                {cat}
+              </button>
+            ))}
+          </div>
+
+          {/* Grid */}
+          <motion.div layout className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+            <AnimatePresence mode="popLayout">
+              {filtered.map((project) => (
+                <ProjectCard key={project.id} project={project} />
+              ))}
+            </AnimatePresence>
+          </motion.div>
+
+          {filtered.length === 0 && (
+            <div className="text-center py-20">
+              <p style={{ color: '#6B6B7A' }}>No projects in this category yet.</p>
+            </div>
+          )}
+        </div>
+      </main>
+    </>
+  );
+}
