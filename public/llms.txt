@@ -39,4 +39,4 @@ Contact form: https://kavyagrawal.dev/contact
 - About: https://kavyagrawal.dev/about
 - Projects: https://kavyagrawal.dev/projects
 - Contact: https://kavyagrawal.dev/contact
-- Sitemap: https://kavyagrawal.dev/sitemap
+- Sitemap: https://kavyagrawal.dev/sitemap.xml

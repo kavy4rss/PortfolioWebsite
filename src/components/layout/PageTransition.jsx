@@ -12,7 +12,6 @@ const PAGE_NAMES = {
   '/contact':         'Contact',
   '/privacy-policy':  'Privacy Policy',
   '/terms-of-service':'Terms of Service',
-  '/sitemap':         'Sitemap',
 };
 
 function getPageName(pathname) {

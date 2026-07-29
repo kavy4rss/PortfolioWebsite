@@ -14,7 +14,6 @@ import Clients from './pages/Clients';
 import Contact from './pages/Contact';
 import PrivacyPolicy from './pages/PrivacyPolicy';
 import TermsOfService from './pages/TermsOfService';
-import Sitemap from './pages/Sitemap';
 import NotFound from './pages/NotFound';
 
 import { useEffect } from 'react';
@@ -92,14 +91,6 @@ function AppRoutes() {
             element={
               <PageTransition>
                 <TermsOfService />
-              </PageTransition>
-            }
-          />
-          <Route
-            path="/sitemap"
-            element={
-              <PageTransition>
-                <Sitemap />
               </PageTransition>
             }
           />

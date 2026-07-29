@@ -8,6 +8,11 @@
   to = "/index.html"
   status = 200
 
+[[headers]]
+  for = "/sitemap.xml"
+  [headers.values]
+    Content-Type = "application/xml; charset=utf-8"
+
 # Aggressive Immutable Caching for Static Assets (Images, Fonts, JS, CSS)
 [[headers]]
   for = "/assets/*"

@@ -2,7 +2,7 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url>
     <loc>https://kavyagrawal.dev/</loc>
-    <changefreq>monthly</changefreq>
+    <changefreq>weekly</changefreq>
     <priority>1.0</priority>
   </url>
   <url>
@@ -16,24 +16,44 @@
     <priority>0.9</priority>
   </url>
   <url>
-    <loc>https://kavyagrawal.dev/projects/nexus-saas-platform</loc>
+    <loc>https://kavyagrawal.dev/clients</loc>
     <changefreq>monthly</changefreq>
     <priority>0.7</priority>
   </url>
   <url>
-    <loc>https://kavyagrawal.dev/projects/swift-delivery-app</loc>
+    <loc>https://kavyagrawal.dev/projects/signal-scout</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kavyagrawal.dev/projects/payvault-gateway</loc>
+    <loc>https://kavyagrawal.dev/projects/freelancer-crm</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
   </url>
   <url>
-    <loc>https://kavyagrawal.dev/projects/mindflow-ai</loc>
+    <loc>https://kavyagrawal.dev/projects/funnelfixpro</loc>
     <changefreq>monthly</changefreq>
-    <priority>0.7</priority>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kavyagrawal.dev/projects/vyoamax</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kavyagrawal.dev/projects/craftstockmanager</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kavyagrawal.dev/projects/karma-navigator</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
+  </url>
+  <url>
+    <loc>https://kavyagrawal.dev/projects/safeguard</loc>
+    <changefreq>monthly</changefreq>
+    <priority>0.8</priority>
   </url>
   <url>
     <loc>https://kavyagrawal.dev/contact</loc>
@@ -49,10 +69,5 @@
     <loc>https://kavyagrawal.dev/terms-of-service</loc>
     <changefreq>yearly</changefreq>
     <priority>0.3</priority>
-  </url>
-  <url>
-    <loc>https://kavyagrawal.dev/sitemap</loc>
-    <changefreq>monthly</changefreq>
-    <priority>0.4</priority>
   </url>
 </urlset>

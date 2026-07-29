@@ -12,7 +12,7 @@ const quickLinks = [
 ];
 
 const utilLinks = [
-  { label: 'Sitemap', to: '/sitemap' },
+  { label: 'Sitemap', to: '/sitemap.xml' },
   { label: 'Privacy Policy', to: '/privacy-policy' },
   { label: 'Terms of Service', to: '/terms-of-service' },
 ];
@@ -111,13 +111,25 @@ export default function Footer() {
             <ul className="flex flex-col gap-2">
               {utilLinks.map((l) => (
                 <li key={l.to}>
-                  <Link
-                    to={l.to}
-                    className="text-sm transition-colors duration-200 hover:text-white"
-                    style={{ color: '#A0A0AA' }}
-                  >
-                    {l.label}
-                  </Link>
+                  {l.to.endsWith('.xml') ? (
+                    <a
+                      href={l.to}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="text-sm transition-colors duration-200 hover:text-white"
+                      style={{ color: '#A0A0AA' }}
+                    >
+                      {l.label}
+                    </a>
+                  ) : (
+                    <Link
+                      to={l.to}
+                      className="text-sm transition-colors duration-200 hover:text-white"
+                      style={{ color: '#A0A0AA' }}
+                    >
+                      {l.label}
+                    </Link>
+                  )}
                 </li>
               ))}
             </ul>
