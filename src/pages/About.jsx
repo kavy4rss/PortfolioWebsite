@@ -9,6 +9,8 @@ import {
 import { education, interests } from '../data/education';
 import Badge from '../components/ui/Badge';
 import profilePhoto from '../media/Kavy/IMG_8209.jpg';
+import { SITE_URL, OG_IMAGE } from '../seo.config';
+import { breadcrumbSchema, personSchema } from '../lib/schema';
 
 // Import Gaming Logos
 import valorantLogo from '../media/Gaming/valorant-black-logo-transparent-free-png.webp';
@@ -122,8 +124,11 @@ function AboutTab() {
             <div className="w-full h-full rounded-[22px] overflow-hidden" style={{ background: '#13141A' }}>
               <img
                 src={profilePhoto}
-                alt="Kavy Agrawal"
+                alt="Kavy Agrawal — Full Stack Developer from India"
                 className="w-full h-full object-cover object-top"
+                width="256"
+                height="288"
+                loading="lazy"
               />
             </div>
           </div>
@@ -920,9 +925,24 @@ export default function About() {
   return (
     <>
       <Helmet>
-        <title>About — Kavy Agrawal | Full Stack Developer</title>
-        <meta name="description" content="Learn about Kavy Agrawal — Full Stack Developer, SaaS Architect, and App Developer from India. Bio, interests, and education." />
-        <link rel="canonical" href="https://kavyagrawal.dev/about" />
+        <title>About Kavy Agrawal | Full Stack Developer & SaaS Architect, India</title>
+        <meta name="description" content="Kavy Agrawal is a full-stack developer and SaaS architect from Kanpur, India. Learn about his background, tech stack (React, Node.js, Flutter), and approach to building scalable digital products." />
+        <link rel="canonical" href={`${SITE_URL}/about`} />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:type" content="profile" />
+        <meta property="og:url" content={`${SITE_URL}/about`} />
+        <meta property="og:title" content="About Kavy Agrawal | Full Stack Developer & SaaS Architect" />
+        <meta property="og:description" content="Kavy Agrawal is a full-stack developer from Kanpur, India, specialising in React, Node.js, Flutter, and SaaS architecture." />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="About Kavy Agrawal | Full Stack Developer" />
+        <meta name="twitter:description" content="Kavy Agrawal is a full-stack developer from Kanpur, India, specialising in React, Node.js, Flutter, and SaaS architecture." />
+        <meta name="twitter:image" content={OG_IMAGE} />
+        <script type="application/ld+json">{JSON.stringify(personSchema())}</script>
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema([
+          { name: 'Home', url: `${SITE_URL}/` },
+          { name: 'About', url: `${SITE_URL}/about` },
+        ]))}</script>
       </Helmet>
 
       <main id="main-content" className="pt-28 pb-20">

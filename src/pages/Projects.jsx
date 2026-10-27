@@ -6,6 +6,8 @@ import { ExternalLink, Github, ArrowRight } from 'lucide-react';
 import { projects, projectCategories } from '../data/projects';
 import Card from '../components/ui/Card';
 import Tag from '../components/ui/Tag';
+import { SITE_URL, OG_IMAGE } from '../seo.config';
+import { breadcrumbSchema } from '../lib/schema';
 
 const tagColors = {
   'Web': '#FFFFFF',
@@ -97,9 +99,22 @@ export default function Projects() {
   return (
     <>
       <Helmet>
-        <title>Projects — Kavy Agrawal | Full Stack Developer</title>
-        <meta name="description" content="Browse Kavy Agrawal's portfolio projects — SaaS platforms, Flutter apps, web applications, and AI-integrated products." />
-        <link rel="canonical" href="https://kavyagrawal.dev/projects" />
+        <title>Projects — Kavy Agrawal | React, SaaS & Flutter Portfolio</title>
+        <meta name="description" content="Browse Kavy Agrawal's portfolio: Signal Scout AI Chrome extension, Freelancer CRM SaaS, Flutter apps, and web platforms built with React, Node.js, and TypeScript." />
+        <link rel="canonical" href={`${SITE_URL}/projects`} />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${SITE_URL}/projects`} />
+        <meta property="og:title" content="Projects — Kavy Agrawal | React, SaaS & Flutter Portfolio" />
+        <meta property="og:description" content="Browse Kavy Agrawal's portfolio: AI Chrome extensions, SaaS platforms, Flutter apps, and React web applications." />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Projects — Kavy Agrawal | React, SaaS & Flutter Portfolio" />
+        <meta name="twitter:image" content={OG_IMAGE} />
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema([
+          { name: 'Home', url: `${SITE_URL}/` },
+          { name: 'Projects', url: `${SITE_URL}/projects` },
+        ]))}</script>
       </Helmet>
 
       <main id="main-content" className="pt-28 pb-20">

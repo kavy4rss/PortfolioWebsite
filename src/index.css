@@ -268,3 +268,42 @@ h1, h2, h3, h4, h5, h6 {
   animation: holo-rotate 4s ease infinite;
 }
 
+/* ─── Skip link (accessibility) ───────────────────────────────── */
+.skip-link {
+  position: absolute;
+  left: -9999px;
+  top: 4px;
+  z-index: 9999;
+  padding: 8px 16px;
+  background: var(--accent-yellow);
+  color: #000;
+  font-weight: 600;
+  border-radius: 4px;
+  text-decoration: none;
+  font-size: 0.875rem;
+  transition: left 0s;
+}
+.skip-link:focus {
+  left: 16px;
+}
+
+/* ─── Focus visible ring ───────────────────────────────────────── */
+:focus-visible {
+  outline: 2px solid var(--accent-yellow);
+  outline-offset: 2px;
+  border-radius: 4px;
+}
+
+/* ─── prefers-reduced-motion ───────────────────────────────────── */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+    scroll-behavior: auto !important;
+  }
+}
+
+

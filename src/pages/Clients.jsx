@@ -13,6 +13,8 @@ import { Link } from 'react-router-dom';
 import Badge from '../components/ui/Badge';
 import Card from '../components/ui/Card';
 import sgmicLogo from '../media/Client/Sgmic.jpg';
+import { SITE_URL, OG_IMAGE } from '../seo.config';
+import { breadcrumbSchema } from '../lib/schema';
 
 const sgmicFeatures = [
   {
@@ -64,12 +66,25 @@ export default function Clients() {
   return (
     <>
       <Helmet>
-        <title>Clients &amp; Partnerships — Kavy Agrawal | Full Stack &amp; Web Developer</title>
+        <title>Clients & Partnerships — Kavy Agrawal | Web Development India</title>
         <meta
           name="description"
-          content="Explore client partnerships and web solutions delivered by Kavy Agrawal, featuring Saraswati Gyan Mandir Inter College (SGMIC)."
+          content="Kavy Agrawal has delivered web solutions for clients including Saraswati Gyan Mandir Inter College (SGMIC). Explore client work and available development services."
         />
-        <link rel="canonical" href="https://kavyagrawal.dev/clients" />
+        <link rel="canonical" href={`${SITE_URL}/clients`} />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${SITE_URL}/clients`} />
+        <meta property="og:title" content="Clients & Partnerships — Kavy Agrawal" />
+        <meta property="og:description" content="Web solutions delivered for schools, businesses, and enterprises by Kavy Agrawal — Full Stack Developer, India." />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Clients — Kavy Agrawal" />
+        <meta name="twitter:image" content={OG_IMAGE} />
+        <script type="application/ld+json">{JSON.stringify(breadcrumbSchema([
+          { name: 'Home', url: `${SITE_URL}/` },
+          { name: 'Clients', url: `${SITE_URL}/clients` },
+        ]))}</script>
       </Helmet>
 
       <main id="main-content" className="pt-24 sm:pt-28 pb-16 sm:pb-20">

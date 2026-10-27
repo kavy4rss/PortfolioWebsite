@@ -18,6 +18,7 @@ export default function PrivacyPolicy() {
         <title>Privacy Policy — Kavy Agrawal</title>
         <meta name="description" content="Privacy Policy for Kavy Agrawal's portfolio website. Learn how your data is collected and used." />
         <link rel="canonical" href="https://kavyagrawal.dev/privacy-policy" />
+        <meta name="robots" content="noindex, follow" />
       </Helmet>
 
       <main id="main-content" className="pt-28 pb-20">

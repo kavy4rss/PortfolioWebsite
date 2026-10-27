@@ -207,11 +207,15 @@ export default function Hero() {
                   className="w-full h-full rounded-[28px] flex items-center justify-center overflow-hidden"
                   style={{ background: '#13141A' }}
                 >
-                  {/* Profile photo */}
+                  {/* Profile photo — LCP element */}
                   <img
                     src={profilePhoto}
-                    alt="Kavy Agrawal — Full Stack Developer"
+                    alt="Kavy Agrawal — Full Stack Developer and SaaS Architect based in India"
                     className="w-full h-full object-cover object-top"
+                    width="320"
+                    height="320"
+                    fetchpriority="high"
+                    loading="eager"
                     draggable={false}
                   />
                 </div>

@@ -18,6 +18,7 @@ export default function TermsOfService() {
         <title>Terms of Service — Kavy Agrawal</title>
         <meta name="description" content="Terms of Service for Kavy Agrawal's portfolio website." />
         <link rel="canonical" href="https://kavyagrawal.dev/terms-of-service" />
+        <meta name="robots" content="noindex, follow" />
       </Helmet>
 
       <main id="main-content" className="pt-28 pb-20">

@@ -4,23 +4,20 @@ import '../src/index.css';
 
 export const metadata: Metadata = {
   metadataBase: new URL('https://kavyagrawal.dev'),
-  title: 'Kavya Agrawal | Best App & SaaS Developer in Kanpur',
+  title: 'Kavy Agrawal | Full Stack, SaaS & React Developer India',
   description:
-    'Kavya Agrawal is Kanpur\'s top website developer, Flutter app developer, and B2B SaaS architect crafting high-performance, production-grade web solutions.',
+    'Kavy Agrawal is a full-stack developer and SaaS architect based in India, specializing in React, Node.js, Flutter, and scalable SaaS solutions.',
   keywords: [
-    'best website developers in Kanpur',
-    'application developer in Kanpur',
-    'Top B2B SaaS developer Kanpur',
-    'Kavya Agrawal',
     'Kavy Agrawal',
+    'React developer India portfolio',
+    'full stack developer India',
+    'SaaS architect India',
     'Flutter developer Kanpur',
-    'Next.js developer Kanpur',
-    'Full Stack Software Engineer Kanpur',
-    'Web Application Developer Kanpur',
+    'Kanpur website developer',
   ],
-  authors: [{ name: 'Kavya Agrawal', url: 'https://kavyagrawal.dev' }],
-  creator: 'Kavya Agrawal',
-  publisher: 'Kavya Agrawal',
+  authors: [{ name: 'Kavy Agrawal', url: 'https://kavyagrawal.dev' }],
+  creator: 'Kavy Agrawal',
+  publisher: 'Kavy Agrawal',
   robots: {
     index: true,
     follow: true,
@@ -36,25 +33,25 @@ export const metadata: Metadata = {
     type: 'website',
     locale: 'en_IN',
     url: 'https://kavyagrawal.dev',
-    title: 'Kavya Agrawal | Best App & SaaS Developer in Kanpur',
+    title: 'Kavy Agrawal | Full Stack, SaaS & React Developer India',
     description:
-      'Premier Full-Stack Developer & B2B SaaS Architect in Kanpur, UP, India. Building high-throughput web apps, cross-platform mobile software, and AI systems.',
-    siteName: 'Kavya Agrawal Portfolio',
+      'Kavy Agrawal is a full-stack developer and SaaS architect based in India, specializing in React, Node.js, Flutter, and scalable SaaS solutions.',
+    siteName: 'Kavy Agrawal Portfolio',
     images: [
       {
         url: 'https://kavyagrawal.dev/og-image.jpg',
         width: 1200,
         height: 630,
-        alt: 'Kavya Agrawal — Top Website & B2B SaaS Developer in Kanpur',
+        alt: 'Kavy Agrawal — Full Stack Developer & SaaS Architect',
       },
     ],
   },
   twitter: {
     card: 'summary_large_image',
-    title: 'Kavya Agrawal | Best App & SaaS Developer in Kanpur',
+    title: 'Kavy Agrawal | Full Stack, SaaS & React Developer India',
     description:
-      'Kanpur\'s leading software developer specializing in Next.js, Flutter, and B2B SaaS engineering.',
-    creator: '@kavy4rss',
+      'Kavy Agrawal is a full-stack developer and SaaS architect based in India, specializing in React, Node.js, Flutter, and scalable SaaS solutions.',
+    creator: '@kavyagrawal',
     images: ['https://kavyagrawal.dev/og-image.jpg'],
   },
   alternates: {

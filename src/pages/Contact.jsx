@@ -7,6 +7,7 @@ import { z } from 'zod';
 import { zodResolver } from '@hookform/resolvers/zod';
 import { socialLinks, contactInfo } from '../data/social';
 import Badge from '../components/ui/Badge';
+import { SITE_URL, OG_IMAGE } from '../seo.config';
 
 const contactSchema = z.object({
   name: z.string().min(2, 'Name must be at least 2 characters'),
@@ -97,9 +98,18 @@ export default function Contact() {
   return (
     <>
       <Helmet>
-        <title>Contact — Kavy Agrawal | Let's Work Together</title>
-        <meta name="description" content="Get in touch with Kavy Agrawal — Full Stack Developer available for freelance projects, SaaS development, and technical consultation." />
-        <link rel="canonical" href="https://kavyagrawal.dev/contact" />
+        <title>Contact Kavy Agrawal | Hire a Full Stack Developer in India</title>
+        <meta name="description" content="Hire Kavy Agrawal for freelance web development, SaaS architecture, Flutter apps, or payment gateway integration. Based in India — available globally." />
+        <link rel="canonical" href={`${SITE_URL}/contact`} />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:type" content="website" />
+        <meta property="og:url" content={`${SITE_URL}/contact`} />
+        <meta property="og:title" content="Contact Kavy Agrawal | Hire a Full Stack Developer" />
+        <meta property="og:description" content="Hire Kavy Agrawal for freelance web development, SaaS architecture, Flutter apps, or payment gateway integration." />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content="Contact Kavy Agrawal | Hire a Full Stack Developer" />
+        <meta name="twitter:image" content={OG_IMAGE} />
       </Helmet>
 
       <main id="main-content" className="pt-28 pb-20">

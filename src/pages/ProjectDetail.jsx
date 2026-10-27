@@ -5,6 +5,7 @@ import { ArrowLeft, ExternalLink, Github, CheckCircle2 } from 'lucide-react';
 import { projects } from '../data/projects';
 import Tag from '../components/ui/Tag';
 import { softwareProjectSchema, breadcrumbSchema } from '../lib/schema';
+import { SITE_URL, OG_IMAGE } from '../seo.config';
 
 const tagColors = {
   'Web': '#FFFFFF',
@@ -32,14 +33,24 @@ export default function ProjectDetail() {
   return (
     <>
       <Helmet>
-        <title>{project.title} — Kavy Agrawal</title>
-        <meta name="description" content={project.tagline} />
-        <link rel="canonical" href={`https://kavyagrawal.dev/projects/${project.slug}`} />
+        <title>{project.title} — Kavy Agrawal | {project.category} Project</title>
+        <meta name="description" content={`${project.tagline}. ${project.description.slice(0, 100)}...`} />
+        <link rel="canonical" href={`${SITE_URL}/projects/${project.slug}`} />
+        <meta name="robots" content="index, follow" />
+        <meta property="og:type" content="article" />
+        <meta property="og:url" content={`${SITE_URL}/projects/${project.slug}`} />
+        <meta property="og:title" content={`${project.title} — Kavy Agrawal`} />
+        <meta property="og:description" content={project.tagline} />
+        <meta property="og:image" content={OG_IMAGE} />
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={`${project.title} — Kavy Agrawal`} />
+        <meta name="twitter:description" content={project.tagline} />
+        <meta name="twitter:image" content={OG_IMAGE} />
         <script type="application/ld+json">{JSON.stringify(softwareProjectSchema(project))}</script>
         <script type="application/ld+json">{JSON.stringify(breadcrumbSchema([
-          { name: 'Home', url: 'https://kavyagrawal.dev/' },
-          { name: 'Projects', url: 'https://kavyagrawal.dev/projects' },
-          { name: project.title, url: `https://kavyagrawal.dev/projects/${project.slug}` },
+          { name: 'Home', url: `${SITE_URL}/` },
+          { name: 'Projects', url: `${SITE_URL}/projects` },
+          { name: project.title, url: `${SITE_URL}/projects/${project.slug}` },
         ]))}</script>
       </Helmet>
 

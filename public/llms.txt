@@ -1,42 +1,166 @@
-# Kavy Agrawal — Personal Portfolio
+# Kavy Agrawal — Developer Portfolio
+# https://kavyagrawal.dev
+# Last updated: 2026-10-27
+#
+# This file provides a plain-text summary of this site for AI language models,
+# following the llms.txt convention (https://llmstxt.org/).
 
 ## Who is Kavy Agrawal?
 
-Kavy Agrawal is a full-stack developer and SaaS architect based in India, specializing in building premium web applications, cross-platform mobile apps, and scalable SaaS platforms.
+Kavy Agrawal is a freelance full-stack developer and SaaS architect based in Kanpur,
+Uttar Pradesh, India. He builds scalable web applications, cross-platform mobile apps,
+and SaaS platforms that serve real users. He is available for freelance and full-time
+opportunities globally.
 
-## Skills & Expertise
+Contact: kavyagrawalrss@gmail.com
+Portfolio: https://kavyagrawal.dev
+LinkedIn: https://www.linkedin.com/in/kavy-agrawal-471739367/
+GitHub: https://github.com/kavy4rss
 
-- **Frontend**: React, Next.js, TypeScript, Tailwind CSS, Framer Motion
+## Technical Skills
+
+- **Frontend**: React 18, Next.js, TypeScript, Tailwind CSS, Framer Motion, Three.js
 - **Backend**: Node.js, Python, FastAPI, Express.js, GraphQL
 - **Mobile**: Flutter, Dart
-- **Databases**: PostgreSQL, MongoDB, Redis, Firebase
-- **Cloud/DevOps**: AWS, Docker, Netlify
+- **Databases**: PostgreSQL, MongoDB, Redis, Firebase, Supabase
+- **Cloud / DevOps**: AWS, Docker, Netlify, Vercel
 - **Payments**: Stripe, Razorpay, PayU — custom gateway integration
-- **AI**: OpenAI API integration, LangChain
-
-## Tagline
-
-"Turning Vision Into Reality"
+- **AI / ML**: Gemini API, OpenAI API, LangChain, Chrome Extension Manifest V3
+- **Tools**: Vite, Webpack, Git, Zod, React Hook Form, dnd-kit
 
 ## Services
 
 Kavy Agrawal is available for:
-- Full-stack web application development
+- Full-stack web application development (React, Node.js, TypeScript)
 - SaaS platform architecture and development
-- Flutter mobile app development
-- Custom payment gateway integration
-- AI integration (OpenAI/LangChain)
-- Technical consultation
+- Flutter mobile app development (iOS & Android)
+- Custom payment gateway integration (Stripe, Razorpay, PayU)
+- AI feature integration (Gemini, OpenAI, LangChain)
+- Chrome Extension development (Manifest V3)
+- Technical consultation and code review
 
-## Contact
+## Projects
 
-Portfolio: https://kavyagrawal.dev
-Contact form: https://kavyagrawal.dev/contact
+### Signal Scout
+URL: https://kavyagrawal.dev/projects/signal-scout
+Live: https://kavyagrawal.netlify.app/signal-scout/guide
+GitHub: https://github.com/kavy4rss/Signal-Scout_Public
+Category: AI / Chrome Extension
+
+Signal Scout is a Chrome Extension that scores content credibility in real-time on
+social media platforms (LinkedIn, X/Twitter). It uses on-device Gemini Nano AI for
+zero-latency, privacy-first credibility scoring with cloud fallback to Gemini 1.5 Flash.
+Built with Manifest V3, MutationObserver, and Webpack.
+
+Problem solved: Social feeds are full of misinformation; Signal Scout attaches live
+credibility badges without any data leaving the user's device.
+
+Tech: Manifest V3, Gemini Nano, Gemini 1.5 Flash, Chrome Extension API, Webpack, MutationObserver
+
+---
+
+### Freelancer CRM
+URL: https://kavyagrawal.dev/projects/freelancer-crm
+Live: https://freelancer-crm-neon.vercel.app/
+Category: SaaS
+
+A comprehensive SaaS command center for freelancers. Features interactive drag-and-drop
+Kanban boards (dnd-kit), real-time financial analytics (Recharts), automated invoice
+generation with EmailJS reminders, and multi-tenant data model simulation with offline
+caching.
+
+Tech: React 18, TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, dnd-kit, Recharts, EmailJS
+
+---
+
+### Funnel Fix Pro
+URL: https://kavyagrawal.dev/projects/funnelfixpro
+Live: https://funnelfixpro.netlify.app/
+Category: SaaS / AI
+
+An interactive agency showcase platform demonstrating AI-driven lead qualification,
+automated follow-up funnels, and revenue optimization for digital agencies. Features
+a 3D BentoGrid layout and mock AI Lead Audit generator.
+
+Tech: React 18, TypeScript, Tailwind CSS, Radix UI, Framer Motion, React Query, Zod, Recharts
+
+---
+
+### Vyoamax Event Organiser
+URL: https://kavyagrawal.dev/projects/vyoamax
+Live: https://vyoamax.netlify.app/
+Category: Web
+
+A high-performance lead-generation portal for an event management company. Features
+fluid Lenis scroll physics, 3D perspective contact cards, and client certificate
+verification search.
+
+Tech: Vite, React 18, TypeScript, Tailwind CSS, Shadcn UI, Framer Motion, Lenis
+
+---
+
+### Craft Stock Manager
+URL: https://kavyagrawal.dev/projects/craftstockmanager
+Live: https://craftstockmanager.netlify.app/
+Category: SaaS (Micro SaaS)
+
+An offline-first Micro SaaS for crafters and small manufacturers to track raw materials
+using FIFO logic, with automated expiration warnings and LocalStorage persistence.
+
+Tech: React 18, TypeScript, Tailwind CSS, Radix UI, Context API, React Query, Zod, Recharts
+
+---
+
+### Karma Navigator (Coming Soon)
+URL: https://kavyagrawal.dev/projects/karma-navigator
+Category: AI / Web
+
+A Vedic astrology AI chatbot frontend with a rotating mandala canvas, 5-step birth
+signature wizard, and floating AI chat UI. Designed for Gemini + FastAPI integration.
+
+Tech: React 18, TypeScript, Tailwind CSS, Shadcn UI, Framer Motion
+
+---
+
+### SafeGuard AI (Coming Soon)
+URL: https://kavyagrawal.dev/projects/safeguard
+Category: Mobile App / AI
+
+A Flutter mobile security app that intercepts SMS phishing, scam calls, and digital
+arrest fraud using Aho-Corasick string matching and Gemini 1.5 Flash AI analysis.
+
+Tech: Flutter, Dart 3.2+, Riverpod, go_router, Gemini 1.5 Flash
+
+---
+
+## Clients
+
+### Saraswati Gyan Mandir Inter College (SGMIC)
+Kavy Agrawal built a bilingual (English/Hindi) school website for SGMIC with a 3-step
+admission portal, digital facilities showcase, and faculty hub.
+
+## Frequently Asked Questions
+
+**Q: Is Kavy Agrawal available for freelance work?**
+A: Yes. Kavy Agrawal is open to freelance and full-time opportunities globally.
+
+**Q: What technologies does Kavy Agrawal specialise in?**
+A: React, Node.js, TypeScript, Flutter, Python, SaaS architecture, and payment gateway
+integration (Stripe, Razorpay).
+
+**Q: Where is Kavy Agrawal located?**
+A: Kanpur, Uttar Pradesh, India. He works with clients worldwide.
+
+**Q: What types of projects does Kavy Agrawal take on?**
+A: Full-stack web apps, SaaS platforms, Flutter mobile apps, Chrome Extensions, AI
+integrations, and custom payment gateway implementations.
 
 ## Key Pages
 
 - Home: https://kavyagrawal.dev/
 - About: https://kavyagrawal.dev/about
 - Projects: https://kavyagrawal.dev/projects
+- Clients: https://kavyagrawal.dev/clients
 - Contact: https://kavyagrawal.dev/contact
 - Sitemap: https://kavyagrawal.dev/sitemap.xml
+
