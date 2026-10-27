@@ -2,6 +2,13 @@ import type { Metadata } from 'next';
 import StructuredData from './components/StructuredData';
 import '../src/index.css';
 
+// Fallback module declaration for TypeScript environments without Next.js installed
+declare module 'next' {
+  export interface Metadata {
+    [key: string]: any;
+  }
+}
+
 export const metadata: Metadata = {
   metadataBase: new URL('https://kavyagrawal.dev'),
   title: 'Kavy Agrawal | Full Stack, SaaS & React Developer India',
